@@ -1,0 +1,172 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #0a0a0a;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.nav__list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: #aaa;
+  transition: 0.3s;
+}
+
+.nav__link:hover,
+.nav__link--active {
+  color: #fff;
+  border-bottom: 2px solid #00aaff;
+}
+
+/* HISTORY */
+.history-container {
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+  overflow: hidden;
+}
+
+.history-text-container {
+  max-width: 500px;
+  opacity: 0;
+  transform: translateX(-80px);
+  transition: all 1s ease;
+}
+
+.history-image {
+  width: 450px;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 1.2s ease;
+}
+
+/* ACTIVE STATES */
+.history-text-container.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.history-image.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* EXIT (fade out when scrolling away) */
+.history-container.fade-out .history-text-container,
+.history-container.fade-out .history-image {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+
+/* MISSION */
+.mission-container {
+  height: 100vh;
+  background: url("../Assets/e90-group.jpg") center/cover no-repeat;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mission-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+}
+
+.mission-title,
+.mission-paragraph {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: all 1s ease;
+}
+
+.mission-title.visible,
+.mission-paragraph.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* VIBES */
+.vibes-container {
+  padding: 6rem 10%;
+  background: #111;
+  text-align: center;
+}
+
+.vibes-subsection {
+  margin-top: 2rem;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.vibes-subsection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* CTA */
+.cta-container {
+  padding: 6rem 10%;
+  text-align: center;
+  background: linear-gradient(135deg, #001f3f, #003366);
+}
+
+.cta-button {
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 30px;
+  background: #00aaff;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cta-button:hover {
+  background: #0088cc;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .history-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .history-image {
+    width: 100%;
+    margin-top: 2rem;
+  }
+}

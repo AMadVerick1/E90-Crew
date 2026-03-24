@@ -1,0 +1,182 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #0a0a0a;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+}
+
+.nav__list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.nav__link {
+  text-decoration: none;
+  color: #aaa;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav__link:hover,
+.nav__link--active {
+  color: #fff;
+  border-bottom: 2px solid #00aaff;
+}
+
+/* HERO */
+.hero-container {
+  height: 100vh;
+  background: url("../Assets/luke-schobert-c7FxaoA-jkM-unsplash.jpg") no-repeat center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.hero__title {
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+.hero__subtitle {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+/* SECTION BASE */
+.the-crew-container,
+.our-drive-container,
+.invitational-cta-container {
+  padding: 6rem 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* CREW */
+.the-crew-container {
+  background: #111;
+}
+
+.crew-image__image {
+  width: 400px;
+  border-radius: 12px;
+  transition: transform 0.5s ease;
+}
+
+.crew-image__image:hover {
+  transform: scale(1.05);
+}
+
+/* OUR DRIVE */
+.our-drive-container {
+  background: #0d0d0d;
+  text-align: center;
+  flex-direction: column;
+}
+
+/* CTA */
+.invitational-cta-container {
+  background: linear-gradient(135deg, #001f3f, #003366);
+  text-align: center;
+  flex-direction: column;
+}
+
+.invitational-cta__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.invitational-cta__description {
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  padding: 0.8rem 2rem;
+  background: #00aaff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.cta-button:hover {
+  background: #0088cc;
+}
+
+/* PARALLAX ELEMENT (moving background layer) */
+.parallax-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: url("../Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg") repeat-x;
+  opacity: 0.1;
+  z-index: -1;
+}
+
+/* SCROLL ANIMATION */
+.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .the-crew-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .crew-image__image {
+    width: 100%;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+  }
+}
