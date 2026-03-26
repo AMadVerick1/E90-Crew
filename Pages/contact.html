@@ -1,91 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Join the Convoy | E90 Social Club</title>
+
     <link rel="stylesheet" href="../Styles/contact.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <!-- Contact Us Page for the BMW E90 social club -->
-    <!-- Hero Section briefly introducing the page's contents. Background image of the social club's members, and overlaying text -->
-    <!-- Memebers Section, enlist new members interested in joining the crew -->
-    <!-- Charity Drive Section is divided into contributors and applicants -->
-    <!-- Contributors and Applicants have their own sections, with inverted split layouts -->
 
+    <!-- motion layer -->
+    <div class="parallax-road"></div>
 
-    <!-- Navigation -->
-    <header>
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <a href="index.html" class="nav__link">Home</a>
-                </li>
-                <li class="nav__item">
-                    <a href="about.html" class="nav__link">About</a>
-                </li>
-                <li class="nav__item">
-                    <a href="contact.html" class="nav__link nav__link--active">Contact</a>
-                </li>
-            </ul>
+    <!-- NAV -->
+    <header class="nav">
+        <div class="nav__logo">E90</div>
+        <nav>
+            <a href="index.html" class="nav__link">Home</a>
+            <a href="about.html" class="nav__link">Crew</a>
+            <a href="contact.html" class="nav__link  nav__link--active">Join</a>
         </nav>
     </header>
 
-    <div class="hero-container">
-        <div class="hero">
-            <h1 class="hero_title">Join Us For The Ride</h1>
-            <p class="hero_tagline"></p>
+    <!-- HERO -->
+    <section class="hero-container">
+        <div class="hero-overlay">
+            <h1>Join the Convoy</h1>
+            <p>
+                Not everyone gets it.
+                But if you do — you’re already halfway in.
+            </p>
         </div>
-        <div class="interest-container">
-            <h1 class="interest_title">Interested In Joining?</h1>
-            <p class="interest_tagline">Join us for the ride and become a part of the best social club in the world!</p>
-            <div class="form-container"></div>
-        </div>
-    </div>
+    </section>
 
-    <div class="charity-drive-container">
-        <div class="charity-drive">
-            <h1 class="charity-drive_title">Charity Drive</h1>
-            <p class="charity-drive_tagline">Whether you're a contributor or an applicant, we welcome you to our charity drive!</p>
+    <!-- MEMBERSHIP -->
+    <section class="membership-container fade-in">
+        <h2>Ride With Us</h2>
+        <p>
+            No forms. No pressure. Just tell us who you are.
+        </p>
+
+        <form class="form">
+            <input type="text" placeholder="Name">
+            <input type="email" placeholder="Email">
+            <textarea placeholder="Your story"></textarea>
+            <button type="submit">Send It</button>
+        </form>
+    </section>
+
+    <!-- CHARITY -->
+    <section class="charity-container">
+
+        <div class="charity-intro fade-in">
+            <h2>The Charity Drive</h2>
+            <p>
+                Same convoy. Bigger purpose.
+            </p>
         </div>
-        <div class="contributors-container">
-            <div class="contributors-form">
-                <h1 class="contributors_title">Contributors</h1>
-                <form action="">
-                    <label for="contributors_name">Name</label>
-                    <input type="text" id="contributors_name" name="contributors_name">
-                    <label for="contributors_email">Email</label>
-                    <input type="email" id="contributors_email" name="contributors_email">
-                    <label for="contributors_message">Message</label>
-                    <textarea name="contributors_message" id="contributors_message" cols="30" rows="10"></textarea>
-                    <button type="submit">Submit</button>
-                </form>
+
+        <!-- CONTRIBUTORS -->
+        <div class="split contributors fade-in">
+            <div class="text">
+                <h3>The Drivers</h3>
+                <p>
+                    You bring the machine. You bring the presence.
+                    Together, we turn motion into impact.
+                </p>
             </div>
-            <div class="contributors_text">
-                <h1 class="con_emote_title">The Charity Drivers</h1>
-                <p class="con_emote_paragraph">As a charity driver for the BMW E90 social club, you can make a difference in the lives of those in need.</p>
-            </div>
+
+            <form class="form">
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <textarea placeholder="How you'd like to contribute"></textarea>
+                <button type="submit">Join Drive</button>
+            </form>
         </div>
-        <div class="applicants-container">
-            <div class="applicants-form">
-                <h1 class="applicants_title">Applicants</h1>
-                <form action="">
-                    <label for="applicants_name">Name</label>
-                    <input type="text" id="applicants_name" name="applicants_name">
-                    <label for="applicants_email">Email</label>
-                    <input type="email" id="applicants_email" name="applicants_email">
-                    <label for="applicants_message">Message</label>
-                    <textarea name="applicants_message" id="applicants_message" cols="30" rows="10"></textarea>
-                    <button type="submit">Submit</button>
-                </form>
+
+        <!-- APPLICANTS -->
+        <div class="split reverse applicants fade-in">
+
+            <div class="text">
+                <h3>The Cause</h3>
+                <p>
+                    You bring the reason. We bring the convoy.
+                    Together, we make noise where it matters.
+                </p>
             </div>
-            <div class="applicants_text">
-                <h1 class="app_emote_title">The Engines That Drive Us</h1>
-                <p class="app_emote_paragraph">As an applicant your cause is our mission: to share the good vibes.</p>
-            </div>
+
+            <form class="form">
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <textarea placeholder="Tell us your cause"></textarea>
+                <button type="submit">Submit Cause</button>
+            </form>
         </div>
-    </div>
+
+    </section>
 
     <script src="../Scripts/contact.js"></script>
 </body>
+
 </html>

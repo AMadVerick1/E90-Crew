@@ -1,76 +1,69 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="../Styles/index.css" />
-  </head>
-  <body>
-    <!-- Home Page for the BMW E90 social club -->
-    <!-- Have a background that trails an E90 across the page through each page, parallaxing effect to mimic going on a journey with the crew -->
-    <!-- Have a navigation bar, with links to each page -->
-    <!-- Have a hero section, with a title and a tagline that sums up the site -->
-    <!-- Have a who we are section, brief overview of the social club -->
-    <!-- Have a section of what they do (breakfast runs and charity runs), and why they do it (share the good vibes) -->
-    <!-- Have an invitational cta section (join the ride), button linked to the contact page -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E90 Social Club</title>
 
-    <!-- Navigation -->
-    <header>
-      <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__item">
-            <a href="index.html" class="nav__link nav__link--active">Home</a>
-          </li>
-          <li class="nav__item">
-            <a href="about.html" class="nav__link">About</a>
-          </li>
-          <li class="nav__item">
-            <a href="contact.html" class="nav__link">Contact</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+  <link rel="stylesheet" href="../Styles/index.css">
 
-    <!-- Hero Section -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+</head>
 
-    <div class="hero-container">
-      <div class="hero">
-        <h1 class="hero__title">BMW E90 Social Club</h1>
-        <p class="hero__subtitle">Sharing the Good Vibes</p>
-      </div>
-    </div>
+<body>
 
-    <div class="the-crew-container">
-      <div class="the-crew">
-        <h2 class="the-crew__title">The Crew</h2>
-        <p class="the-crew__description">
-          From an idea to a community driven by a common goal, the spirit of the BMW E90. The social club 
-        </p>
-      </div>
-      <div class="crew-image">
-        <img src="../Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg" alt="The Crew" class="crew-image__image" />
-      </div>
-    </div>
+<!-- Subtle moving background -->
+<div class="parallax-road"></div>
 
-    <div class="our-drive-container">
-      <div class="our-drive">
-        <h2 class="our-drive__title">Our Drive</h2>
-        <p class="our-drive__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.
-        </p>
-      </div>
-    </div>
+<!-- NAV -->
+<header class="nav">
+  <div class="nav__logo">E90</div>
+  <nav>
+    <a href="index.html" class="nav__link nav__link--active">Home</a>
+    <a href="about.html" class="nav__link">Crew</a>
+    <a href="contact.html" class="nav__link">Join</a>
+  </nav>
+</header>
 
-    <div class="invitational-cta-container">
-      <div class="invitational-cta">
-        <h2 class="invitational-cta__title">Invitational CTA</h2>
-        <p class="invitational-cta__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.
-        </p>
-      </div>
-    </div>
-  </body>
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero__content">
+    <h1>BMW E90</h1>
+    <p>Precision. Brotherhood. The Drive Never Ends.</p>
+    <a href="#join" class="cta-button">Join the Convoy</a>
+  </div>
+</section>
 
-  <script src="../Scripts/index.js"></script>
+<!-- CREW -->
+<section id="crew" class="section split">
+  <div class="text fade-in">
+    <h2>The Crew</h2>
+    <p>
+      Not a club. A convoy. Built on late nights,
+      early runs, and the unmistakable pull of the E90.
+    </p>
+  </div>
+  <div class="image fade-in">
+    <img src="Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg">
+  </div>
+</section>
+
+<!-- DRIVE -->
+<section id="drive" class="section center fade-in">
+  <h2>Our Drive</h2>
+  <p>
+    Sunrise breakfast runs. Charity convoys.
+    No ego — just engines, roads, and a shared pulse.
+  </p>
+</section>
+
+<!-- CTA -->
+<section id="join" class="cta fade-in">
+  <h2>Join the Convoy</h2>
+  <p>If you know, you know.</p>
+  <a href="contact.html" class="cta-button">Get In</a>
+</section>
+
+<script src="../Scripts/index.js"></script>
+</body>
 </html>
