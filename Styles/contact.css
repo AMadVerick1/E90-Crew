@@ -1,132 +1,510 @@
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  --blue: #00aaff;
+  --blue-dim: rgba(0, 170, 255, 0.10);
+  --blue-border: rgba(0, 170, 255, 0.25);
+  --white: #ffffff;
+  --off-white: #e8e8e8;
+  --muted: #888;
+  --dark: #050505;
+  --card-bg: #0d0d0d;
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: #050505;
-  color: white;
-  font-family: "Orbitron", sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  font-family: "Inter", sans-serif;
   overflow-x: hidden;
 }
 
-/* NAV */
+/* ─── NAV ────────────────────────────────────────────── */
 .nav {
   position: fixed;
   width: 100%;
-  padding: 1rem 3rem;
+  padding: 1.2rem 4rem;
   display: flex;
   justify-content: space-between;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
+  align-items: center;
   z-index: 1000;
+  transition: background 0.4s, border-color 0.4s;
+}
+
+.nav.scrolled {
+  background: rgba(5, 5, 5, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.nav__logo {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: 4px;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav__logo span {
+  color: var(--blue);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav__link {
-  margin-left: 2rem;
-  color: #aaa;
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
   text-decoration: none;
-  text-decoration: none;
-  color: #aaa;
-  transition: 0.3s;
+  padding: 0.45rem 1.2rem;
+  border-radius: 50px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
 }
 
-.nav__link:hover,
+.nav__link:hover {
+  color: var(--white);
+  border-color: var(--card-border);
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .nav__link--active {
-  color: #fff;
-  border-bottom: 2px solid #00aaff;
+  color: var(--white);
+  border-color: var(--blue-border);
+  background: var(--blue-dim);
 }
 
-
-/* HERO */
-.hero-container {
-  height: 100vh;
-  background: url("../Assets/luke-schobert-c7FxaoA-jkM-unsplash.jpg") center/cover;
+/* ─── UTILITIES ──────────────────────────────────────── */
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--blue);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
 }
 
-.hero-overlay {
-  text-align: center;
-  max-width: 600px;
+.section-label::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--blue);
+  flex-shrink: 0;
 }
 
-/* MEMBERSHIP */
-.membership-container {
-  padding: 6rem 10%;
-  text-align: center;
+.section-title {
+  font-family: "Orbitron", sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.1;
 }
 
-.form {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.form input,
-.form textarea {
-  padding: 1rem;
-  background: #111;
-  border: 1px solid #222;
-  color: white;
-}
-
-.form button {
-  padding: 1rem;
-  background: #00aaff;
-  border: none;
-  cursor: pointer;
-}
-
-/* CHARITY */
-.charity-container {
-  padding: 6rem 10%;
-}
-
-.split {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 4rem;
-  gap: 2rem;
-}
-
-.split.reverse {
-  flex-direction: row-reverse;
-}
-
-.text {
-  max-width: 400px;
-}
-
-/* PARALLAX ROAD */
-.parallax-road {
-  position: fixed;
-  bottom: 0;
-  width: 200%;
-  height: 120px;
-  background: repeating-linear-gradient(
-    to right,
-    #111 0px,
-    #111 40px,
-    #222 40px,
-    #222 80px
-  );
-  opacity: 0.2;
-  z-index: -1;
-}
-
-/* FADE-IN */
 .fade-in {
   opacity: 0;
-  transform: translateY(40px);
-  transition: 0.8s ease;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ─── HERO ───────────────────────────────────────────── */
+.hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: flex-end;
+  background: url("../Assets/luke-schobert-c7FxaoA-jkM-unsplash.jpg") center 30%/cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom,
+      rgba(5, 5, 5, 0.2) 0%,
+      rgba(5, 5, 5, 0.5) 50%,
+      rgba(5, 5, 5, 1) 100%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  padding: 0 6rem 6rem;
+  max-width: 860px;
+}
+
+.hero__eyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hero__eyebrow::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--blue);
+}
+
+.hero h1 {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--blue);
+}
+
+.hero__sub {
+  font-size: 1rem;
+  font-weight: 300;
+  color: #bbb;
+  line-height: 1.9;
+  margin-top: 1.5rem;
+  max-width: 420px;
+}
+
+/* ─── MEMBERSHIP ─────────────────────────────────────── */
+.membership {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--card-border);
+}
+
+.membership__info {
+  padding: 6rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.membership__info::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--card-border), transparent);
+}
+
+.membership__info p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: #bbb;
+  line-height: 1.9;
+  margin-top: 1.2rem;
+}
+
+.membership__perks {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--card-border);
+}
+
+.perk {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--card-border);
+  transition: background 0.3s;
+}
+
+.perk:last-child {
+  border-bottom: none;
+}
+
+.perk:hover {
+  background: var(--blue-dim);
+}
+
+.perk__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+.perk span {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  color: var(--off-white);
+}
+
+.membership__form {
+  padding: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ─── FORM SYSTEM ─────────────────────────────────────── */
+.form-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-block label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: -0.4rem;
+}
+
+.form-block input,
+.form-block textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--white);
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  padding: 0.75rem 0;
+  outline: none;
+  transition: border-color 0.3s;
+  resize: none;
+}
+
+.form-block input::placeholder,
+.form-block textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.form-block input:focus,
+.form-block textarea:focus {
+  border-color: var(--blue);
+}
+
+.form-block textarea {
+  min-height: 100px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.btn-submit {
+  margin-top: 0.5rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 50px;
+  background: var(--blue);
+  color: var(--dark);
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: all 0.3s;
+}
+
+.btn-submit:hover {
+  background: #22beff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 170, 255, 0.35);
+}
+
+/* success state */
+.form-success {
+  display: none;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--blue-border);
+  background: var(--blue-dim);
+  margin-top: 1rem;
+}
+
+.form-success svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--blue);
+  fill: none;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+.form-success span {
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  color: var(--blue);
+}
+
+/* ─── CHARITY DIVIDER ─────────────────────────────────── */
+.charity-divider {
+  padding: 6rem 6rem 0;
+  border-top: 1px solid var(--card-border);
+}
+
+.charity-divider__inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--card-border);
+  gap: 4rem;
+}
+
+.charity-divider__inner p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 360px;
+  line-height: 1.8;
+  text-align: right;
+}
+
+/* ─── CHARITY SPLIT FORMS ─────────────────────────────── */
+.charity-forms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.charity-form-panel {
+  padding: 4rem 6rem;
+  position: relative;
+}
+
+.charity-form-panel:first-child {
+  border-right: 1px solid var(--card-border);
+}
+
+.charity-form-panel__num {
+  font-family: "Orbitron", sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  position: absolute;
+  top: 2rem;
+  right: 3rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.charity-form-panel h3 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+.charity-form-panel>p {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  max-width: 340px;
+}
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .hero__content {
+    padding: 0 1.5rem 5rem;
+  }
+
+  .membership {
+    grid-template-columns: 1fr;
+  }
+
+  .membership__info,
+  .membership__form {
+    padding: 4rem 1.5rem;
+  }
+
+  .membership__info::after {
+    display: none;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .charity-divider {
+    padding: 4rem 1.5rem 0;
+  }
+
+  .charity-divider__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .charity-divider__inner p {
+    text-align: left;
+  }
+
+  .charity-forms {
+    grid-template-columns: 1fr;
+  }
+
+  .charity-form-panel {
+    padding: 3rem 1.5rem;
+  }
+
+  .charity-form-panel:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--card-border);
+  }
 }

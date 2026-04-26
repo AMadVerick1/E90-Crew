@@ -1,90 +1,232 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Crew | E90 Social Club</title>
-
-    <link rel="stylesheet" href="../Styles/about.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Crew | E90 Social Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Styles/about.css">
 </head>
-
 <body>
 
-    <!-- subtle motion layer -->
-    <div class="parallax-road"></div>
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__logo">E<span>90</span></a>
+    <nav class="nav__links">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="about.html" class="nav__link nav__link--active">Crew</a>
+      <a href="contact.html" class="nav__link">Join</a>
+    </nav>
+  </header>
 
-    <!-- NAV -->
-    <header class="nav">
-        <div class="nav__logo">E90</div>
-        <nav>
-            <a href="index.html" class="nav__link">Home</a>
-            <a href="about.html" class="nav__link nav__link--active">Crew</a>
-            <a href="contact.html" class="nav__link">Join</a>
-        </nav>
-    </header>
+  <!-- HISTORY -->
+  <section class="history fade-in">
+    <div class="history__text">
+      <div class="history__bg-num">E90</div>
+      <div class="section-label">Est. Johannesburg</div>
+      <h1>The<br><em>Club</em></h1>
+      <p>
+        It didn't start as a movement. Just a few cars, a few late nights,
+        and a shared obsession with the E90. Then the convoy grew.
+      </p>
+    </div>
+    <div class="history__image">
+      <img src="../Assets/IMG-20260405-WA0010.jpg" alt="E90 Club">
+    </div>
+  </section>
 
-    <!-- HISTORY -->
-    <section class="history-container">
-        <div class="history-text">
-            <h1>The Club</h1>
-            <p>
-                It didn’t start as a movement. Just a few cars, a few late nights,
-                and a shared obsession with the E90. Then the convoy grew.
-            </p>
+  <!-- MISSION -->
+  <div class="mission fade-in">
+    <div class="mission__inner">
+      <div class="section-label">What Drives Us</div>
+      <h2>The <span>Drive</span></h2>
+      <p>
+        We don't just show up. We move with purpose —
+        from sunrise runs to giving back where it matters.
+        Every convoy has a reason. Every mile means something.
+      </p>
+    </div>
+  </div>
+
+  <!-- VIBES -->
+  <section class="vibes fade-in">
+    <div class="vibes__header">
+      <div class="section-label">How We Move</div>
+      <h2 class="section-title">The Vibes</h2>
+    </div>
+
+    <div class="vibes__grid">
+
+      <div class="vibe-card">
+        <div class="vibe-card__icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
         </div>
+        <h2>Breakfast Runs</h2>
+        <p>
+          Early mornings. Empty roads. Engines warming with the sun.
+          That first pull out of the driveway — that's the ritual.
+        </p>
+      </div>
 
-        <div class="history-image-wrapper">
-            <img src="../Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg" alt="E90">
+      <div class="vibe-card">
+        <div class="vibe-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
-    </section>
+        <h2>Charity Drives</h2>
+        <p>
+          Same machines. Different purpose.
+          We ride together — and give back louder than we arrive.
+        </p>
+      </div>
 
-    <!-- MISSION -->
-    <section class="mission-container">
-        <div class="mission-overlay">
-            <h1>The Drive</h1>
-            <p>
-                We don’t just show up. We move with purpose —
-                from sunrise runs to giving back where it matters.
-            </p>
+      <div class="vibe-card">
+        <div class="vibe-card__icon">
+          <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
         </div>
-    </section>
+        <h2>Long Hauls</h2>
+        <p>
+          Multi-day convoys. Mountain passes. The kind of roads
+          that remind you exactly why you chose this car.
+        </p>
+      </div>
 
-    <!-- VIBES -->
-    <section class="vibes-container">
-        <h1>The Vibes</h1>
+      <div class="vibe-card">
+        <div class="vibe-card__icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h2>Track Days</h2>
+        <p>
+          When the road isn't enough. Full send on tarmac built for exactly this.
+          No commuters. No speed limits. Just you and the car.
+        </p>
+      </div>
 
-        <div class="vibes-grid">
+    </div>
+  </section>
 
-            <div class="vibe-card">
-                <h2>Breakfast Runs</h2>
-                <p>
-                    Early mornings. Empty roads. Engines warming with the sun.
-                    That first pull — that’s the ritual.
-                </p>
+  <!-- EVENTS -->
+  <section class="events fade-in">
+    <div class="events__header">
+      <div>
+        <div class="section-label">What's Coming</div>
+        <h2 class="section-title">Upcoming Events</h2>
+      </div>
+      <p>Lock in. Miss one<br>and you'll hear about it all month.</p>
+    </div>
+
+    <div class="events-grid">
+
+      <div class="event-card">
+        <div class="event-card__img-wrap">
+          <img class="event-card__img" src="../Assets/IMG-20260406-WA0000.jpg" alt="Charity Drive">
+          <span class="event-card__badge">Charity</span>
+        </div>
+        <div class="event-card__body">
+          <h3 class="event-card__title">Charity Drive</h3>
+          <p class="event-card__desc">
+            Bringing the convoy to communities that need it most.
+            Show up, give back, drive home different.
+          </p>
+          <div class="event-card__meta">
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Time</span>
+              <span class="event-meta-item__value">09:00 AM</span>
             </div>
-
-            <div class="vibe-card">
-                <h2>Charity Drives</h2>
-                <p>
-                    Same machines. Different purpose.
-                    We ride together — and give back louder than we arrive.
-                </p>
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Date</span>
+              <span class="event-meta-item__value">21 Jun</span>
             </div>
-
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Location</span>
+              <span class="event-meta-item__value">Sizanani</span>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
 
-    <!-- CTA -->
-    <section class="cta-container">
-        <h1>Join the Convoy</h1>
-        <p>If you feel it, you’re already one of us.</p>
-        <a href="contact.html" class="cta-button">Get In</a>
-    </section>
+      <!-- Placeholder slots — remove when real events are added -->
+      <div class="event-card">
+        <div class="event-card__img-wrap">
+          <img class="event-card__img" src="../Assets/IMG-20260406-WA0000.jpg" alt="">
+          <span class="event-card__badge">Run</span>
+        </div>
+        <div class="event-card__body">
+          <h3 class="event-card__title">Sunrise Run</h3>
+          <p class="event-card__desc">
+            Pre-dawn meetup. Cold engines, warm coffee, open road.
+            Destination TBC — all roads considered.
+          </p>
+          <div class="event-card__meta">
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Time</span>
+              <span class="event-meta-item__value">05:30 AM</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Date</span>
+              <span class="event-meta-item__value">TBC</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Location</span>
+              <span class="event-meta-item__value">Joburg</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <script src="../Scripts/about.js"></script>
+      <div class="event-card">
+        <div class="event-card__img-wrap">
+          <img class="event-card__img" src="../Assets/IMG-20260406-WA0000.jpg" alt="">
+          <span class="event-card__badge">Track</span>
+        </div>
+        <div class="event-card__body">
+          <h3 class="event-card__title">Kyalami Day</h3>
+          <p class="event-card__desc">
+            The circuit, the cars, the crew. One afternoon on track
+            that'll have you replaying every corner.
+          </p>
+          <div class="event-card__meta">
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Time</span>
+              <span class="event-meta-item__value">08:00 AM</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Date</span>
+              <span class="event-meta-item__value">TBC</span>
+            </div>
+            <div class="event-meta-item">
+              <span class="event-meta-item__label">Location</span>
+              <span class="event-meta-item__value">Kyalami</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section fade-in">
+    <h2>Join the<br><span>Convoy</span></h2>
+    <p>If you feel it, you're already one of us.</p>
+    <a href="contact.html" class="btn-primary">Get In</a>
+  </section>
+
+  <script>
+    const nav = document.getElementById("nav");
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 60);
+    });
+
+    const faders = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(f => observer.observe(f));
+  </script>
 </body>
-
 </html>

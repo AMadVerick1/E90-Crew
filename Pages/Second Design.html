@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karzone — Exotic Car Collection</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #111111;
+    --bg2: #181818;
+    --bg3: #1e1e1e;
+    --surface: #222222;
+    --accent: #1e00a5;
+    --accent2: #c8e800;
+    --text: #ffffff;
+    --text-muted: #888888;
+    --text-dim: #555555;
+    --border: #2a2a2a;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-cond: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px; height: 60px;
+    background: rgba(17,17,17,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-cond); font-weight: 700; font-size: 20px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text); text-decoration: none;
+  }
+  .nav-logo svg { width: 28px; height: 28px; }
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    color: var(--text-muted); font-family: var(--font-body); font-size: 13px;
+    font-weight: 500; text-decoration: none; letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .btn-contact {
+    background: var(--accent); color: #000; border: none; cursor: pointer;
+    font-family: var(--font-cond); font-weight: 700; font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 10px 22px; border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-contact:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: 100vh; min-height: 700px;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+    padding-top: 60px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 40%, #0d0d0d 100%);
+  }
+  .hero-car-glow {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 70%;
+    background: radial-gradient(ellipse at 60% 50%, rgba(212,241,0,0.08) 0%, transparent 65%);
+  }
+  /* Stylized car silhouette */
+  .hero-car-img {
+    position: absolute; right: -20px; top: 50%; transform: translateY(-48%);
+    width: 65%; opacity: 0.88;
+  }
+  .hero-car-img svg { width: 100%; height: auto; }
+
+  /* Decorative wheel glow */
+  .wheel-glow {
+    position: absolute; right: 21%; top: 56%;
+    width: 160px; height: 160px; border-radius: 50%;
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 40px var(--accent), 0 0 80px rgba(212,241,0,0.3);
+    animation: wheelPulse 3s ease-in-out infinite;
+  }
+  @keyframes wheelPulse {
+    0%, 100% { box-shadow: 0 0 40px var(--accent), 0 0 80px rgba(212,241,0,0.3); opacity:1;}
+    50% { box-shadow: 0 0 60px var(--accent), 0 0 120px rgba(212,241,0,0.5); opacity:0.8;}
+  }
+
+  .hero-meta {
+    position: absolute; top: 80px; left: 40px; right: 40px;
+    display: flex; gap: 60px;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .hero-meta-label { font-size: 10px; letter-spacing: 2px; color: var(--text-dim); text-transform: uppercase; }
+  .hero-meta-val { font-size: 11px; color: var(--text-muted); max-width: 220px; line-height: 1.4; }
+
+  .hero-content {
+    position: relative; padding: 0 40px 80px;
+    z-index: 2; max-width: 560px;
+  }
+  .hero-num {
+    font-family: var(--font-cond); font-size: 11px; letter-spacing: 3px;
+    color: var(--text-dim); margin-bottom: 16px; text-transform: uppercase;
+  }
+  .hero-headline {
+    font-family: var(--font-display); font-size: clamp(52px, 7vw, 88px);
+    line-height: 0.95; color: var(--text); letter-spacing: 1px;
+  }
+  .hero-headline span { display: block; }
+
+  /* ── HERO BOTTOM BAR ── */
+  .hero-bar {
+    display: grid; grid-template-columns: 1fr 1fr;
+    background: var(--bg2); border-top: 1px solid var(--border);
+  }
+  .hero-bar-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 40px; cursor: pointer; transition: background 0.2s;
+    text-decoration: none; color: var(--text);
+  }
+  .hero-bar-item:first-child { border-right: 1px solid var(--border); }
+  .hero-bar-item:hover { background: var(--surface); }
+  .hero-bar-item span { font-family: var(--font-body); font-size: 13px; letter-spacing: 0.5px; font-weight: 500; }
+  .hero-bar-item svg { width: 18px; height: 18px; stroke: var(--accent); }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 100px 40px;
+    display: grid; grid-template-columns: 200px 1fr 1fr;
+    gap: 60px; align-items: start;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-tag {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-cond); font-size: 11px; letter-spacing: 3px;
+    color: var(--text-muted); text-transform: uppercase; padding-top: 6px;
+  }
+  .section-tag::before {
+    content: ''; display: block; width: 24px; height: 2px; background: var(--accent);
+  }
+  .about-headline {
+    font-family: var(--font-body); font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 600; line-height: 1.3; color: var(--text);
+    grid-column: 2 / 3;
+  }
+  .about-headline .dim { color: var(--text-muted); font-weight: 400; }
+  .about-body {
+    font-size: 13px; color: var(--text-muted); line-height: 1.7;
+    border-left: 1px solid var(--border); padding-left: 32px;
+  }
+  .about-divider {
+    grid-column: 2 / 4; height: 1px; background: var(--border); margin: 0;
+  }
+
+  /* ── ARRIVE IN STYLE ── */
+  .arrive {
+    padding: 80px 40px 0;
+    display: grid; grid-template-columns: 200px 1fr auto;
+    align-items: start; gap: 40px;
+  }
+  .arrive-desc {
+    font-size: 13px; color: var(--text-dim); line-height: 1.6; max-width: 280px;
+  }
+  .arrive-btns {
+    display: flex; flex-direction: column; gap: 10px; align-items: flex-end;
+  }
+  .btn-outline {
+    border: 1px solid var(--border); background: transparent; color: var(--text);
+    font-family: var(--font-cond); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 10px 20px; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--text-muted); background: var(--surface); }
+  .btn-accent {
+    background: var(--accent); color: #000; border: none; cursor: pointer;
+    font-family: var(--font-cond); font-weight: 700; font-size: 12px; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 10px 20px;
+    transition: background 0.2s; text-decoration: none; display: inline-block;
+  }
+  .btn-accent:hover { background: var(--accent2); }
+
+  /* ── CAR SHOWCASE ── */
+  .showcase {
+    position: relative; overflow: hidden;
+    background: var(--bg);
+    padding: 0 0 0;
+  }
+  .showcase-type {
+    padding: 40px 40px 0;
+    font-family: var(--font-cond); font-size: 11px; letter-spacing: 3px;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+  .showcase-name-huge {
+    font-family: var(--font-display);
+    font-size: clamp(80px, 14vw, 180px);
+    line-height: 0.85;
+    color: var(--text);
+    letter-spacing: 4px;
+    padding: 0 32px;
+    user-select: none;
+  }
+  .showcase-inner {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    padding: 0 40px 40px;
+    min-height: 340px;
+  }
+  /* Car image placeholder with gradient */
+  .car-stage {
+    position: relative; width: 100%; display: flex; align-items: center; justify-content: center;
+  }
+  .car-stage-glow {
+    position: absolute; width: 500px; height: 250px; border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(212,241,0,0.12) 0%, transparent 70%);
+    bottom: 0;
+  }
+  .jaguar-img {
+    position: relative; z-index: 2;
+    width: 600px; max-width: 70%;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.8));
+    animation: floatCar 4s ease-in-out infinite;
+  }
+  @keyframes floatCar { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+  /* Small cars on side */
+  .car-alt {
+    position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+    width: 120px; opacity: 0.45; filter: grayscale(0.3);
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .car-alt:hover { opacity: 0.7; }
+  .car-alt-left {
+    position: absolute; left: 20px; top: 50%; transform: translateY(-50%);
+    width: 80px; opacity: 0.3;
+  }
+  .brand-logo-overlay {
+    position: absolute; top: 20px; right: 40px;
+    opacity: 0.4;
+  }
+  .brand-logo-overlay svg { width: 60px; height: 60px; }
+
+  /* ── CAR SPECS ── */
+  .car-specs {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 40px; border-top: 1px solid var(--border);
+    background: var(--bg2);
+  }
+  .car-specs-name {
+    display: flex; flex-direction: column; gap: 6px; flex: 1;
+  }
+  .car-specs-title {
+    font-family: var(--font-cond); font-weight: 700; font-size: 16px; letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .car-specs-desc {
+    font-size: 11px; color: var(--text-dim); max-width: 200px; line-height: 1.5;
+  }
+  .car-specs-stats {
+    display: flex; gap: 48px; flex: 1; justify-content: center;
+  }
+  .stat-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .stat-val {
+    font-family: var(--font-cond); font-weight: 700; font-size: 22px; color: var(--text);
+    display: flex; align-items: baseline; gap: 4px;
+  }
+  .stat-unit { font-size: 10px; color: var(--text-dim); font-weight: 400; letter-spacing: 1px; }
+  .stat-label { font-size: 10px; color: var(--text-dim); letter-spacing: 1.5px; text-transform: uppercase; }
+  .stat-icon { width: 20px; height: 20px; stroke: var(--text-muted); stroke-width: 1.5; fill: none; }
+  .car-specs-action { flex: 0; }
+
+  /* ── BRANDS ── */
+  .brands-section {
+    padding: 80px 40px;
+    border-top: 1px solid var(--border);
+  }
+  .brands-header {
+    display: grid; grid-template-columns: 200px 1fr;
+    gap: 60px; margin-bottom: 60px;
+  }
+  .brands-desc { font-size: 13px; color: var(--text-dim); line-height: 1.7; }
+  .brands-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .brand-card {
+    background: var(--bg2); padding: 36px 20px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .brand-card:hover { background: var(--surface); }
+  .brand-card.featured {
+    background: var(--bg3);
+  }
+  .brand-card.featured::after {
+    content: ''; position: absolute; inset: 0;
+    border: 1px solid rgba(212,241,0,0.3);
+    pointer-events: none;
+  }
+  .brand-card-logo {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .brand-card-logo svg { width: 60px; height: 50px; }
+  .brand-card-logo span {
+    font-family: var(--font-cond); font-size: 11px; letter-spacing: 3px;
+    color: var(--text-muted); text-transform: uppercase; opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .brand-card:hover .brand-card-logo span { opacity: 1; }
+  .brands-cta { margin-top: 32px; display: flex; }
+  .brands-desc-side {
+    padding: 0 40px; background: var(--bg); display: none;
+  }
+
+  .brands-row-bottom {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; margin-top: 60px; align-items: start;
+  }
+  .brand-featured-info { display: flex; flex-direction: column; gap: 16px; }
+  .brand-featured-info h3 {
+    font-family: var(--font-cond); font-weight: 700; font-size: 22px; letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .brand-featured-info p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+  /* ── SERVICE ── */
+  .service-section {
+    display: grid; grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--border);
+    min-height: 460px;
+  }
+  .service-img {
+    position: relative; overflow: hidden; background: #0a0a0a;
+  }
+  .service-img-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #0d0d0d 0%, #222 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  /* Car key image simulation */
+  .car-key-art {
+    width: 280px; height: 360px; position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .car-key-art svg { width: 100%; height: 100%; }
+
+  .service-content {
+    padding: 80px 60px;
+    display: flex; flex-direction: column; justify-content: center; gap: 24px;
+    background: var(--bg);
+  }
+  .service-content h2 {
+    font-family: var(--font-display); font-size: clamp(42px, 5vw, 64px);
+    line-height: 1; letter-spacing: 1px; color: var(--text);
+  }
+  .service-content p {
+    font-size: 13px; color: var(--text-muted); line-height: 1.7; max-width: 340px;
+  }
+
+  /* ── FOOTER ── */
+  .footer-top {
+    padding: 60px 40px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 40px; border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .footer-brand {}
+  .footer-logo {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+    font-family: var(--font-cond); font-weight: 700; font-size: 20px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text);
+  }
+  .footer-tagline { font-size: 12px; color: var(--text-dim); line-height: 1.6; max-width: 220px; }
+  .footer-contact-btn {
+    margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border); background: transparent; color: var(--text);
+    font-family: var(--font-cond); font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 10px 20px; cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .footer-contact-btn:hover { border-color: var(--text-muted); }
+  .footer-contact-btn svg { width: 14px; height: 14px; stroke: currentColor; }
+
+  .footer-col h4 {
+    font-family: var(--font-cond); font-size: 11px; letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px;
+  }
+  .footer-col p, .footer-col a {
+    font-size: 13px; color: var(--text-muted); line-height: 1.8; display: block;
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--text); }
+
+  .footer-back-top {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+  }
+  .footer-back-top span {
+    font-family: var(--font-cond); font-size: 11px; letter-spacing: 2px;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+  .back-top-btn {
+    width: 44px; height: 44px; border: 1px solid var(--border);
+    background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .back-top-btn:hover { background: var(--surface); }
+  .back-top-btn svg { width: 18px; height: 18px; stroke: var(--text-muted); }
+
+  .footer-socials {
+    display: flex; gap: 16px; margin-top: 20px;
+  }
+  .footer-socials a {
+    width: 32px; height: 32px; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; color: var(--text-muted);
+    transition: border-color 0.2s, color 0.2s;
+    font-size: 12px;
+  }
+  .footer-socials a:hover { border-color: var(--text-muted); color: var(--text); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding: 18px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--bg);
+  }
+  .footer-bottom-links {
+    display: flex; gap: 40px; list-style: none;
+  }
+  .footer-bottom-links a {
+    font-size: 12px; color: var(--text-dim); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-bottom-links a:hover { color: var(--text-muted); }
+  .footer-copy { font-size: 12px; color: var(--text-dim); }
+
+  /* ── DIVIDER LINE ── */
+  .divider { height: 1px; background: var(--border); }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 14 L10 6 L18 6 L24 14 L18 22 L10 22 Z" stroke="#d4f100" stroke-width="1.5" fill="none"/>
+      <path d="M10 6 L14 14 L10 22 M18 6 L14 14 L18 22 M4 14 L14 14 L24 14" stroke="#d4f100" stroke-width="1" fill="none" opacity="0.5"/>
+    </svg>
+    KARZONE
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Reservations</a></li>
+    <li><a href="#">Vehicles</a></li>
+    <li><a href="#">Locations</a></li>
+    <li><a href="#">Car Sales</a></li>
+    <li><a href="#">For Business</a></li>
+  </ul>
+  <button class="btn-contact">Contact Us</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-car-glow"></div>
+
+  <!-- Decorative wheel ring -->
+  <div class="wheel-glow"></div>
+
+  <!-- Hero SVG car silhouette (stylized sports car) -->
+  <div class="hero-car-img">
+    <svg viewBox="0 0 900 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Car body -->
+      <path d="M80 310 Q90 290 120 260 L200 220 Q260 180 340 170 L520 165 Q600 165 660 185 L760 220 Q820 240 840 270 L850 310 Z" fill="#1a1a1a" stroke="#333" stroke-width="1"/>
+      <path d="M200 220 Q270 160 380 145 L540 140 Q620 140 680 165 L760 220" fill="#222" stroke="#3a3a3a" stroke-width="1"/>
+      <!-- Roof -->
+      <path d="M240 220 Q280 155 370 135 L560 130 Q640 130 700 158 L760 220 Z" fill="#151515" stroke="#2a2a2a" stroke-width="1"/>
+      <!-- Window -->
+      <path d="M265 215 Q295 158 372 140 L548 136 Q622 136 692 162 L740 215 Z" fill="#0d1a0d" stroke="#1a2a1a" stroke-width="0.5" opacity="0.6"/>
+      <!-- Grill / front -->
+      <path d="M80 310 Q75 330 82 350 L120 370 L140 310" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+      <!-- Head light -->
+      <ellipse cx="95" cy="335" rx="18" ry="8" fill="#222" stroke="#d4f100" stroke-width="1"/>
+      <ellipse cx="95" cy="335" rx="10" ry="4" fill="#d4f100" opacity="0.6"/>
+      <!-- Tail -->
+      <path d="M840 310 Q848 330 840 355 L800 370 L790 310" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+      <!-- Tail light -->
+      <rect x="815" y="320" width="24" height="10" rx="2" fill="#cc0000" opacity="0.7"/>
+      <!-- Wheels -->
+      <circle cx="210" cy="350" r="58" fill="#111" stroke="#333" stroke-width="2"/>
+      <circle cx="210" cy="350" r="44" fill="#0a0a0a" stroke="#3a3a3a" stroke-width="1.5"/>
+      <circle cx="210" cy="350" r="18" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/>
+      <!-- Spokes front -->
+      <line x1="210" y1="306" x2="210" y2="394" stroke="#444" stroke-width="1.5"/>
+      <line x1="166" y1="350" x2="254" y2="350" stroke="#444" stroke-width="1.5"/>
+      <line x1="179" y1="319" x2="241" y2="381" stroke="#444" stroke-width="1"/>
+      <line x1="241" y1="319" x2="179" y2="381" stroke="#444" stroke-width="1"/>
+
+      <circle cx="700" cy="350" r="58" fill="#111" stroke="#333" stroke-width="2"/>
+      <circle cx="700" cy="350" r="44" fill="#0a0a0a" stroke="#3a3a3a" stroke-width="1.5"/>
+      <circle cx="700" cy="350" r="18" fill="#1a1a1a" stroke="#555" stroke-width="1.5"/>
+      <!-- Spokes rear -->
+      <line x1="700" y1="306" x2="700" y2="394" stroke="#444" stroke-width="1.5"/>
+      <line x1="656" y1="350" x2="744" y2="350" stroke="#444" stroke-width="1.5"/>
+      <line x1="669" y1="319" x2="731" y2="381" stroke="#444" stroke-width="1"/>
+      <line x1="731" y1="319" x2="669" y2="381" stroke="#444" stroke-width="1"/>
+
+      <!-- Ground shadow -->
+      <ellipse cx="455" cy="405" rx="380" ry="14" fill="rgba(0,0,0,0.6)"/>
+      <!-- Door line -->
+      <path d="M360 215 L380 310 M520 215 L530 310" stroke="#2a2a2a" stroke-width="1" opacity="0.5"/>
+      <!-- Mirror -->
+      <path d="M232 222 L250 210 L270 218" fill="#1a1a1a" stroke="#333" stroke-width="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Hero top meta -->
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">New York, USA</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Exotic car collection</span>
+      <span class="hero-meta-val">by Karzone</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-val">From exotic sports cars to luxury sedans and SUVs, Karzone's Exotic Car Collection offers an exceptional selection and Karzone's trusted, personalised service.</span>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-num">001</div>
+    <h1 class="hero-headline">
+      <span>Rent the luxury</span>
+      <span>Own the thrill.</span>
+    </h1>
+  </div>
+</section>
+
+<!-- HERO BAR -->
+<div class="hero-bar">
+  <a href="#" class="hero-bar-item">
+    <span>Rent a car</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+  <a href="#" class="hero-bar-item">
+    <span>Buy a car</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+</div>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="section-tag">About Us</div>
+  <div class="about-headline">
+    From exotic sports cars to luxury sedans and SUVs, <span class="dim">Karzone's Exotic Car Collection</span> offers an exceptional selection and Karzone's trusted, personalised service.
+  </div>
+  <div class="about-body">
+    We provide selection of finest luxury cars to hire such as various types of Mercedes-Benz, Hummer, BMW, Porsche, Alphard, Vellfire, Mini Cooper, Fortuner, Land Cruiser, and variety Toyota fine cars. It's all here to make your delightful days.
+  </div>
+  <div class="about-divider"></div>
+</section>
+
+<!-- ARRIVE IN STYLE -->
+<div class="arrive">
+  <div class="section-tag">Arrive in Style</div>
+  <div class="arrive-desc">Choose from our prestigious collection of world-class brands.</div>
+  <div class="arrive-btns">
+    <a href="#" class="btn-outline">Rent a car</a>
+    <a href="#" class="btn-accent">Buy a car</a>
+  </div>
+</div>
+
+<!-- CAR SHOWCASE -->
+<section class="showcase">
+  <div class="showcase-type">TYPE R</div>
+  <div class="showcase-name-huge">JAGUAR</div>
+  <div class="showcase-inner">
+    <!-- Brand logo overlay -->
+    <div class="brand-logo-overlay">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="serif" font-size="9" letter-spacing="1" opacity="0.6">JAGUAR</text>
+        <ellipse cx="40" cy="40" rx="38" ry="38" stroke="white" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <!-- Leaping jaguar simplified -->
+        <path d="M25 42 Q30 30 38 28 Q46 26 52 32 Q58 38 55 46 Q50 52 42 50 Q34 48 30 42" stroke="white" stroke-width="1" fill="none" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="car-stage">
+      <div class="car-stage-glow"></div>
+      <!-- Jaguar F-Type SVG - yellow sports car -->
+      <svg class="jaguar-img" viewBox="0 0 800 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Shadow -->
+        <ellipse cx="400" cy="360" rx="330" ry="16" fill="rgba(0,0,0,0.7)"/>
+        <!-- Underbody -->
+        <path d="M100 300 Q108 320 140 336 L260 348 L540 348 L660 336 Q692 320 700 300 Z" fill="#1a1400"/>
+        <!-- Main body yellow -->
+        <path d="M95 295 Q98 270 130 240 L210 200 Q270 165 360 155 L480 150 Q570 150 630 175 L700 210 Q740 235 752 268 L758 298 Z" fill="#d4b800"/>
+        <!-- Body highlight top -->
+        <path d="M95 295 Q100 270 132 242 L215 202 Q275 166 363 156 L478 151 Q568 151 628 176 L698 211" fill="none" stroke="#e8cc00" stroke-width="2" opacity="0.5"/>
+        <!-- Roof / cabin -->
+        <path d="M250 200 Q290 145 380 128 L500 124 Q580 124 640 152 L698 200 Z" fill="#c4a800"/>
+        <!-- Roof dark top -->
+        <path d="M270 195 Q305 148 385 133 L498 130 Q573 130 632 156 L688 195 Z" fill="#1a1400"/>
+        <!-- Windows -->
+        <path d="M290 190 Q318 150 388 136 L498 133 Q568 133 625 158 L678 190 Z" fill="#0a1a0a" opacity="0.85" stroke="#1a2a00" stroke-width="0.5"/>
+        <!-- Window divider (B-pillar) -->
+        <line x1="470" y1="133" x2="460" y2="195" stroke="#c4a800" stroke-width="2"/>
+        <!-- Side body lines -->
+        <path d="M130 240 Q200 230 400 228 Q560 228 700 240" stroke="#b89800" stroke-width="1.5" opacity="0.6"/>
+        <path d="M200 260 Q400 255 690 265" stroke="#b89800" stroke-width="1" opacity="0.3"/>
+        <!-- Front grill -->
+        <path d="M95 295 Q88 308 92 325 L130 340 L148 298" fill="#111" stroke="#333" stroke-width="1"/>
+        <path d="M92 305 L130 295 M92 315 L132 308 M94 325 L134 320" stroke="#333" stroke-width="0.8" opacity="0.7"/>
+        <!-- Headlight -->
+        <path d="M95 292 Q88 300 90 308 L108 308 Q115 300 112 292 Z" fill="#222" stroke="#555" stroke-width="0.5"/>
+        <ellipse cx="100" cy="300" rx="8" ry="6" fill="#fff8dc" opacity="0.7"/>
+        <!-- Fog lights -->
+        <ellipse cx="110" cy="320" rx="10" ry="4" fill="#fff3a0" opacity="0.4"/>
+        <!-- Rear -->
+        <path d="M752 270 Q762 288 758 310 L720 340 L700 298" fill="#c4a800" stroke="#a89000" stroke-width="1"/>
+        <!-- Tail lights -->
+        <path d="M740 305 Q758 300 760 318 L756 326 Q738 330 738 318 Z" fill="#cc0000" opacity="0.9"/>
+        <!-- Side vent/door line -->
+        <path d="M370 160 L395 300 M490 158 L505 300" stroke="#c4a800" stroke-width="1" opacity="0.4"/>
+        <!-- Sill / rocker -->
+        <path d="M148 300 L660 300 L660 316 Q600 328 400 330 Q220 328 148 316 Z" fill="#111" stroke="#2a2200" stroke-width="1"/>
+        <!-- Mirror left -->
+        <path d="M235 198 L252 182 L268 192 L260 205" fill="#c4a800" stroke="#a89000" stroke-width="0.5"/>
+        <!-- Front wheel arch -->
+        <path d="M148 298 Q148 270 176 255 L240 250 Q270 250 285 268 L290 300" fill="#1a1400" stroke="#2a2200" stroke-width="1"/>
+        <!-- Rear wheel arch -->
+        <path d="M598 300 Q598 265 622 255 L680 252 Q714 252 728 268 L736 298" fill="#1a1400" stroke="#2a2200" stroke-width="1"/>
+        <!-- Front wheel -->
+        <circle cx="216" cy="320" r="58" fill="#111" stroke="#333" stroke-width="1.5"/>
+        <circle cx="216" cy="320" r="46" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+        <circle cx="216" cy="320" r="20" fill="#d4b800" stroke="#b89800" stroke-width="1.5"/>
+        <circle cx="216" cy="320" r="8" fill="#111"/>
+        <!-- Spokes -->
+        <line x1="216" y1="274" x2="216" y2="366" stroke="#555" stroke-width="2"/>
+        <line x1="170" y1="320" x2="262" y2="320" stroke="#555" stroke-width="2"/>
+        <line x1="183" y1="287" x2="249" y2="353" stroke="#555" stroke-width="1.5"/>
+        <line x1="249" y1="287" x2="183" y2="353" stroke="#555" stroke-width="1.5"/>
+        <line x1="193" y1="276" x2="239" y2="364" stroke="#444" stroke-width="1"/>
+        <line x1="239" y1="276" x2="193" y2="364" stroke="#444" stroke-width="1"/>
+        <!-- Rear wheel -->
+        <circle cx="668" cy="320" r="58" fill="#111" stroke="#333" stroke-width="1.5"/>
+        <circle cx="668" cy="320" r="46" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="1.5"/>
+        <circle cx="668" cy="320" r="20" fill="#d4b800" stroke="#b89800" stroke-width="1.5"/>
+        <circle cx="668" cy="320" r="8" fill="#111"/>
+        <line x1="668" y1="274" x2="668" y2="366" stroke="#555" stroke-width="2"/>
+        <line x1="622" y1="320" x2="714" y2="320" stroke="#555" stroke-width="2"/>
+        <line x1="635" y1="287" x2="701" y2="353" stroke="#555" stroke-width="1.5"/>
+        <line x1="701" y1="287" x2="635" y2="353" stroke="#555" stroke-width="1.5"/>
+        <line x1="645" y1="276" x2="691" y2="364" stroke="#444" stroke-width="1"/>
+        <line x1="691" y1="276" x2="645" y2="364" stroke="#444" stroke-width="1"/>
+        <!-- Exhaust -->
+        <ellipse cx="718" cy="336" rx="6" ry="4" fill="#0a0a0a" stroke="#333" stroke-width="1"/>
+        <ellipse cx="730" cy="336" rx="6" ry="4" fill="#0a0a0a" stroke="#333" stroke-width="1"/>
+      </svg>
+
+      <!-- Small red car alternative on right -->
+      <svg class="car-alt" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M30 140 Q34 125 55 108 L100 88 Q130 72 180 68 L260 66 Q310 66 340 82 L380 108 Q398 122 400 140 Z" fill="#8B1a1a"/>
+        <path d="M80 88 Q110 56 185 46 L260 44 Q314 44 348 68 L380 88" fill="#6B1010"/>
+        <ellipse cx="95" cy="158" r="30" fill="#111"/>
+        <ellipse cx="95" cy="158" r="22" fill="#0a0a0a" stroke="#333" stroke-width="1"/>
+        <ellipse cx="340" cy="158" r="30" fill="#111"/>
+        <ellipse cx="340" cy="158" r="22" fill="#0a0a0a" stroke="#333" stroke-width="1"/>
+        <ellipse cx="200" cy="175" rx="180" ry="10" fill="rgba(0,0,0,0.5)"/>
+      </svg>
+    </div>
+
+    <!-- Small car on left -->
+    <svg class="car-alt-left" viewBox="0 0 300 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 110 Q22 98 38 84 L72 66 Q98 54 140 50 L200 49 Q240 49 264 62 L290 84 Q302 96 300 110 Z" fill="#1a1a3a"/>
+      <path d="M60 66 Q82 44 142 36 L200 35 Q240 35 268 55 L290 70" fill="#111128"/>
+      <ellipse cx="68" cy="125" r="24" fill="#0a0a0a" stroke="#222" stroke-width="1"/>
+      <ellipse cx="252" cy="125" r="24" fill="#0a0a0a" stroke="#222" stroke-width="1"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CAR SPECS BAR -->
+<div class="car-specs">
+  <div class="car-specs-name">
+    <div class="car-specs-title">Jaguar F-Type R</div>
+    <div class="car-specs-desc">Every tap of the accelerator is a gut punch. It's a primal engine, a little talisman against boredom and the indignities of daily life.</div>
+  </div>
+  <div class="car-specs-stats">
+    <div class="stat-item">
+      <svg class="stat-icon" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 12l4-4m-4 4V8"/></svg>
+      <div class="stat-val">450 <span class="stat-unit">HP/BHP</span></div>
+      <div class="stat-label">Power</div>
+    </div>
+    <div class="stat-item">
+      <svg class="stat-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/></svg>
+      <div class="stat-val">280 <span class="stat-unit">KM/H</span></div>
+      <div class="stat-label">Top Speed</div>
+    </div>
+    <div class="stat-item">
+      <svg class="stat-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <div class="stat-val">2024 <span class="stat-unit">MODEL</span></div>
+      <div class="stat-label">Year</div>
+    </div>
+  </div>
+  <div class="car-specs-action">
+    <a href="#" class="btn-accent">View details</a>
+  </div>
+</div>
+
+<!-- BRANDS SECTION -->
+<section class="brands-section">
+  <div class="brands-header">
+    <div>
+      <div class="section-tag" style="margin-bottom:16px;">Popular Exotic &amp; Luxury Rental Makes</div>
+      <p style="font-size:13px; color:var(--text-dim); line-height:1.7;">The finest purveyors of hypercars, sports cars, and SUVs.</p>
+    </div>
+    <div class="brands-desc">No automotive brand is as alluring as Lamborghini, Ferrari, Rolls-Royce, GT3, and Li Cigna; revolutionary dual-stem — their exotic models are the very definition of extravagance.</div>
+  </div>
+
+  <div class="brands-grid">
+    <!-- Bugatti -->
+    <div class="brand-card">
+      <div class="brand-card-logo">
+        <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="60" cy="30" rx="52" ry="26" fill="none" stroke="#888" stroke-width="1.5"/>
+          <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" fill="#aaa" font-family="serif" font-size="11" letter-spacing="3" font-style="italic">bugatti</text>
+        </svg>
+        <span>Bugatti</span>
+      </div>
+    </div>
+    <!-- Ferrari -->
+    <div class="brand-card">
+      <div class="brand-card-logo">
+        <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" fill="#cc2200" font-family="serif" font-size="13" letter-spacing="2" font-style="italic" font-weight="bold">Ferrari</text>
+          <line x1="10" y1="42" x2="90" y2="42" stroke="#cc2200" stroke-width="0.5" opacity="0.5"/>
+        </svg>
+        <span>Ferrari</span>
+      </div>
+    </div>
+    <!-- Lamborghini (featured) -->
+    <div class="brand-card featured">
+      <div class="brand-card-logo">
+        <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Lamborghini shield -->
+          <path d="M40 8 L68 22 L68 52 Q55 68 40 74 Q25 68 12 52 L12 22 Z" fill="#d4b800" stroke="#b89800" stroke-width="1.5"/>
+          <path d="M40 14 L62 26 L62 50 Q51 63 40 68 Q29 63 18 50 L18 26 Z" fill="#b89800"/>
+          <!-- Bull silhouette simplified -->
+          <path d="M28 40 Q30 34 36 32 Q42 30 46 33 Q50 36 50 41 L48 46 Q42 50 36 48 Q30 44 28 40 Z" fill="#d4b800"/>
+          <path d="M24 38 L28 40 M52 38 L50 41" stroke="#d4b800" stroke-width="2"/>
+        </svg>
+        <span>Lamborghini</span>
+      </div>
+    </div>
+    <!-- Jaguar -->
+    <div class="brand-card">
+      <div class="brand-card-logo">
+        <svg viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" fill="#aaa" font-family="serif" font-size="10" letter-spacing="3">JAGUAR</text>
+        </svg>
+        <span>Jaguar</span>
+      </div>
+    </div>
+    <!-- Bentley -->
+    <div class="brand-card">
+      <div class="brand-card-logo">
+        <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bentley wings simplified -->
+          <path d="M50 30 L20 20 Q8 22 6 30 Q8 38 20 40 Z" fill="none" stroke="#888" stroke-width="1.2"/>
+          <path d="M50 30 L80 20 Q92 22 94 30 Q92 38 80 40 Z" fill="none" stroke="#888" stroke-width="1.2"/>
+          <circle cx="50" cy="30" r="8" fill="none" stroke="#888" stroke-width="1.2"/>
+          <text x="50%" y="80%" text-anchor="middle" dominant-baseline="middle" fill="#888" font-family="serif" font-size="8" letter-spacing="2">BENTLEY</text>
+        </svg>
+        <span>Bentley</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="brands-cta" style="margin-top:28px;">
+    <a href="#" class="btn-accent">Buy a Lamborghini</a>
+  </div>
+</section>
+
+<!-- SERVICE SECTION -->
+<section class="service-section">
+  <div class="service-img">
+    <div class="service-img-inner">
+      <!-- Car key top-down SVG art -->
+      <svg class="car-key-art" viewBox="0 0 280 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Car top-down view (aerial) -->
+        <ellipse cx="140" cy="270" rx="70" ry="18" fill="rgba(0,0,0,0.5)"/>
+        <!-- Body -->
+        <path d="M80 80 Q84 50 140 40 Q196 50 200 80 L206 260 Q200 290 140 296 Q80 290 74 260 Z" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1.5"/>
+        <!-- Roof/cabin -->
+        <path d="M95 105 Q96 75 140 68 Q184 75 185 105 L183 200 Q180 220 140 224 Q100 220 97 200 Z" fill="#0d0d0d" stroke="#1a1a1a" stroke-width="1"/>
+        <!-- Windshield -->
+        <path d="M100 108 Q100 82 140 76 Q180 82 180 108" fill="#0a1a0a" opacity="0.6" stroke="#1a2a1a" stroke-width="0.5"/>
+        <!-- Wheels -->
+        <rect x="62" y="110" width="20" height="40" rx="4" fill="#111" stroke="#333" stroke-width="1"/>
+        <rect x="198" y="110" width="20" height="40" rx="4" fill="#111" stroke="#333" stroke-width="1"/>
+        <rect x="62" y="218" width="20" height="40" rx="4" fill="#111" stroke="#333" stroke-width="1"/>
+        <rect x="198" y="218" width="20" height="40" rx="4" fill="#111" stroke="#333" stroke-width="1"/>
+        <!-- Head lights -->
+        <path d="M90 80 Q110 72 130 70" stroke="#fff8dc" stroke-width="2" opacity="0.4"/>
+        <path d="M150 70 Q170 72 190 80" stroke="#fff8dc" stroke-width="2" opacity="0.4"/>
+        <!-- Tail lights -->
+        <path d="M88 268 Q110 275 130 276" stroke="#cc0000" stroke-width="2" opacity="0.6"/>
+        <path d="M150 276 Q170 275 192 268" stroke="#cc0000" stroke-width="2" opacity="0.6"/>
+        <!-- Center line -->
+        <line x1="140" y1="68" x2="140" y2="224" stroke="#2a2a2a" stroke-width="0.5" stroke-dasharray="4 4"/>
+      </svg>
+    </div>
+  </div>
+  <div class="service-content">
+    <h2>Superior<br>Customer<br>Service</h2>
+    <p>Experience exotic car rentals from the brand known for award-winning customer service. We go out to meet your needs and exceed your expectations. We'll ever deliver and collect your exotic vehicle at your convenience.</p>
+    <div>
+      <a href="#" class="btn-accent">View details</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER TOP -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:22px;height:22px;">
+          <path d="M4 14 L10 6 L18 6 L24 14 L18 22 L10 22 Z" stroke="#d4f100" stroke-width="1.5" fill="none"/>
+          <path d="M10 6 L14 14 L10 22 M18 6 L14 14 L18 22 M4 14 L14 14 L24 14" stroke="#d4f100" stroke-width="1" fill="none" opacity="0.5"/>
+        </svg>
+        KARZONE
+      </div>
+      <p class="footer-tagline">Karzone is a place to get the finest luxury cars in the world, delivered to your door.</p>
+      <a href="#" class="footer-contact-btn">
+        Contact Us
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Address</h4>
+      <p>224 W. 79th St, New<br>York, NY 10024, USA</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+6293844478">+62 9384 4478</a>
+      <a href="mailto:Karzone@gmail.com">Karzone@gmail.com</a>
+      <div class="footer-socials" style="margin-top:16px;">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter" style="font-size:13px; font-family:var(--font-cond); font-weight:700;">𝕏</a>
+        <a href="#" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" aria-label="Tiktok">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-back-top">
+      <span>Back to top</span>
+      <button class="back-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <ul class="footer-bottom-links">
+      <li><a href="#">Reservations</a></li>
+      <li><a href="#">Vehicles</a></li>
+      <li><a href="#">Promotions</a></li>
+      <li><a href="#">Businesses</a></li>
+      <li><a href="#">Customer Service</a></li>
+    </ul>
+    <span class="footer-copy">© 2023 Karzone, Inc. All Rights Reserved</span>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Terms &amp; Conditions</a></li>
+      <li><a href="#">Cookies Policy</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Smooth scroll & nav highlight on scroll
+  document.querySelectorAll('a[href="#top"]').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); });
+  });
+
+  // Subtle parallax on hero car
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const carImg = document.querySelector('.hero-car-img');
+    if (carImg) {
+      carImg.style.transform = `translateY(calc(-48% + ${scrollY * 0.12}px))`;
+    }
+    const wheelGlow = document.querySelector('.wheel-glow');
+    if (wheelGlow) {
+      wheelGlow.style.opacity = Math.max(0, 1 - scrollY / 600);
+    }
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.about, .arrive, .showcase, .car-specs, .brands-section, .service-section').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>

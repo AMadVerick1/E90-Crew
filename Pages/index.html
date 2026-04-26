@@ -2,68 +2,161 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>E90 Social Club</title>
-
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../Styles/index.css">
-
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-<!-- Subtle moving background -->
-<div class="parallax-road"></div>
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="nav__logo">E<span>90</span></div>
+    <nav class="nav__links">
+      <a href="index.html" class="nav__link nav__link--active">Home</a>
+      <a href="about.html" class="nav__link">Crew</a>
+      <a href="contact.html" class="nav__link">Join</a>
+    </nav>
+  </header>
 
-<!-- NAV -->
-<header class="nav">
-  <div class="nav__logo">E90</div>
-  <nav>
-    <a href="index.html" class="nav__link nav__link--active">Home</a>
-    <a href="about.html" class="nav__link">Crew</a>
-    <a href="contact.html" class="nav__link">Join</a>
-  </nav>
-</header>
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero__overlay"></div>
+    <div class="hero__content fade-in">
+      <div class="hero__eyebrow">E90 Social Club — Johannesburg</div>
+      <h1>BMW<br><em>E90</em></h1>
+      <p class="hero__sub">Precision. Brotherhood. The Drive Never Ends.</p>
+      <div class="hero__actions">
+        <a href="contact.html" class="btn-primary">Join the Convoy</a>
+        <a href="#crew" class="btn-ghost">Meet the Crew</a>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <div class="hero__scroll-line"></div>
+      Scroll
+    </div>
+  </section>
 
-<!-- HERO -->
-<section id="home" class="hero">
-  <div class="hero__content">
-    <h1>BMW E90</h1>
-    <p>Precision. Brotherhood. The Drive Never Ends.</p>
-    <a href="#join" class="cta-button">Join the Convoy</a>
+  <!-- STAT STRIP -->
+  <div class="stat-strip fade-in">
+    <div class="stat-item">
+      <div class="stat-num">47+</div>
+      <div class="stat-label">Active Members</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">12</div>
+      <div class="stat-label">Convoys Run</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Charity Events</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Open Roads</div>
+    </div>
   </div>
-</section>
 
-<!-- CREW -->
-<section id="crew" class="section split">
-  <div class="text fade-in">
-    <h2>The Crew</h2>
-    <p>
-      Not a club. A convoy. Built on late nights,
-      early runs, and the unmistakable pull of the E90.
-    </p>
+  <!-- CREW -->
+  <section id="crew" class="pad fade-in">
+    <div class="crew">
+      <div class="crew__text">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">The<br>Crew</h2>
+        <p>Not a club. A convoy. Built on late nights, early runs, and the unmistakable pull of the E90.</p>
+        <p>We are drivers, mechanics, and enthusiasts bound by one machine — the E90 3 Series. Whether it's a weekend sunrise run or a cross-province charity convoy, we show up for each other and the road.</p>
+        <p>No egos. No gatekeeping. Just a shared pulse and the engine that started it all.</p>
+      </div>
+      <div class="crew__image">
+        <img src="../Assets/IMG-20260405-WA0019.jpg" alt="The Crew" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- DRIVE -->
+  <div class="drive fade-in" id="drive">
+    <div class="drive__inner">
+      <div class="drive__left">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">Our Drive</h2>
+        <p>Sunrise breakfast runs. Charity convoys. No ego — just engines, roads, and a shared pulse between every driver who ever felt the E90 come alive.</p>
+        <div class="drive__tags">
+          <span class="tag">Sunrise Runs</span>
+          <span class="tag">Charity Convoys</span>
+          <span class="tag">Track Days</span>
+          <span class="tag">Community</span>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="image fade-in">
-    <img src="Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg">
-  </div>
-</section>
 
-<!-- DRIVE -->
-<section id="drive" class="section center fade-in">
-  <h2>Our Drive</h2>
-  <p>
-    Sunrise breakfast runs. Charity convoys.
-    No ego — just engines, roads, and a shared pulse.
-  </p>
-</section>
+  <!-- OUR TRAIL -->
+  <section class="trail fade-in">
+    <div class="trail__header">
+      <div>
+        <div class="section-label">Where We've Been</div>
+        <h2 class="section-title">Our Trail</h2>
+      </div>
+      <p>Every road tells a story. Here are the chapters we've written together.</p>
+    </div>
 
-<!-- CTA -->
-<section id="join" class="cta fade-in">
-  <h2>Join the Convoy</h2>
-  <p>If you know, you know.</p>
-  <a href="contact.html" class="cta-button">Get In</a>
-</section>
+    <div class="gallery">
+      <div class="dest">
+        <img class="dest__img" src="../Assets/IMG-20260406-WA0001.jpg" alt="Sizanani Village">
+        <div class="dest__info">
+          <h3>Sizanani Village</h3>
+          <p>Our flagship charity convoy — 47 cars, one mission, unforgettable roads.</p>
+        </div>
+      </div>
+      <div class="dest">
+        <img class="dest__img" src="../Assets/IMG-20260406-WA0001.jpg" alt="Destination">
+        <div class="dest__info">
+          <h3>Hartbeespoort</h3>
+          <p>Sunrise run. Breakfast at the dam. Zero complaints.</p>
+        </div>
+      </div>
+      <div class="dest">
+        <img class="dest__img" src="../Assets/IMG-20260406-WA0001.jpg" alt="Destination">
+        <div class="dest__info">
+          <h3>Magaliesberg</h3>
+          <p>Mountain passes that reminded us why we chose this car.</p>
+        </div>
+      </div>
+      <div class="dest">
+        <img class="dest__img" src="../Assets/IMG-20260406-WA0001.jpg" alt="Destination">
+        <div class="dest__info">
+          <h3>Kyalami Circuit</h3>
+          <p>One afternoon on track. A memory that doesn't leave.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<script src="../Scripts/index.js"></script>
+  <!-- CTA -->
+  <section class="cta-section fade-in" id="join">
+    <h2>Join the<br><span>Convoy</span></h2>
+    <p>If you know, you know.</p>
+    <a href="contact.html" class="btn-primary">Get In</a>
+  </section>
+
+  <script>
+    // Scrolled nav
+    const nav = document.getElementById("nav");
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 60);
+    });
+
+    // Fade-in on scroll
+    const faders = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    faders.forEach(f => observer.observe(f));
+  </script>
 </body>
 </html>

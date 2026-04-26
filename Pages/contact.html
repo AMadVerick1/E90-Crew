@@ -1,107 +1,202 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join the Convoy | E90 Social Club</title>
-
-    <link rel="stylesheet" href="../Styles/contact.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join the Convoy | E90 Social Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Styles/contact.css">
 </head>
-
 <body>
 
-    <!-- motion layer -->
-    <div class="parallax-road"></div>
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__logo">E<span>90</span></a>
+    <nav class="nav__links">
+      <a href="index.html" class="nav__link">Home</a>
+      <a href="about.html" class="nav__link">Crew</a>
+      <a href="contact.html" class="nav__link nav__link--active">Join</a>
+    </nav>
+  </header>
 
-    <!-- NAV -->
-    <header class="nav">
-        <div class="nav__logo">E90</div>
-        <nav>
-            <a href="index.html" class="nav__link">Home</a>
-            <a href="about.html" class="nav__link">Crew</a>
-            <a href="contact.html" class="nav__link  nav__link--active">Join</a>
-        </nav>
-    </header>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__content fade-in">
+      <div class="hero__eyebrow">E90 Social Club — Johannesburg</div>
+      <h1>Join<br>the <em>Convoy</em></h1>
+      <p class="hero__sub">
+        Not everyone gets it.
+        But if you do — you're already halfway in.
+      </p>
+    </div>
+  </section>
 
-    <!-- HERO -->
-    <section class="hero-container">
-        <div class="hero-overlay">
-            <h1>Join the Convoy</h1>
-            <p>
-                Not everyone gets it.
-                But if you do — you’re already halfway in.
-            </p>
+  <!-- MEMBERSHIP -->
+  <section class="membership fade-in">
+
+    <div class="membership__info">
+      <div class="section-label">Ride With Us</div>
+      <h2 class="section-title">Become<br>a Member</h2>
+      <p>No forms. No gatekeeping. Just tell us who you are and why the E90 found you.</p>
+
+      <div class="membership__perks">
+        <div class="perk">
+          <div class="perk__dot"></div>
+          <span>Access to all convoys and runs</span>
         </div>
-    </section>
-
-    <!-- MEMBERSHIP -->
-    <section class="membership-container fade-in">
-        <h2>Ride With Us</h2>
-        <p>
-            No forms. No pressure. Just tell us who you are.
-        </p>
-
-        <form class="form">
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <textarea placeholder="Your story"></textarea>
-            <button type="submit">Send It</button>
-        </form>
-    </section>
-
-    <!-- CHARITY -->
-    <section class="charity-container">
-
-        <div class="charity-intro fade-in">
-            <h2>The Charity Drive</h2>
-            <p>
-                Same convoy. Bigger purpose.
-            </p>
+        <div class="perk">
+          <div class="perk__dot"></div>
+          <span>Crew WhatsApp + event alerts</span>
         </div>
-
-        <!-- CONTRIBUTORS -->
-        <div class="split contributors fade-in">
-            <div class="text">
-                <h3>The Drivers</h3>
-                <p>
-                    You bring the machine. You bring the presence.
-                    Together, we turn motion into impact.
-                </p>
-            </div>
-
-            <form class="form">
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <textarea placeholder="How you'd like to contribute"></textarea>
-                <button type="submit">Join Drive</button>
-            </form>
+        <div class="perk">
+          <div class="perk__dot"></div>
+          <span>Priority spots on charity drives</span>
         </div>
-
-        <!-- APPLICANTS -->
-        <div class="split reverse applicants fade-in">
-
-            <div class="text">
-                <h3>The Cause</h3>
-                <p>
-                    You bring the reason. We bring the convoy.
-                    Together, we make noise where it matters.
-                </p>
-            </div>
-
-            <form class="form">
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <textarea placeholder="Tell us your cause"></textarea>
-                <button type="submit">Submit Cause</button>
-            </form>
+        <div class="perk">
+          <div class="perk__dot"></div>
+          <span>E90 SC member sticker</span>
         </div>
+      </div>
+    </div>
 
-    </section>
+    <div class="membership__form">
+      <div class="section-label">Your Details</div>
+      <form class="form-block" id="membership-form">
+        <div class="form-row">
+          <div>
+            <label>Name</label>
+            <input type="text" placeholder="Your name" required>
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div>
+          <label>Your Story</label>
+          <textarea placeholder="How did the E90 find you?" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send It</button>
+        <div class="form-success" id="membership-success">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>We've got you. We'll be in touch.</span>
+        </div>
+      </form>
+    </div>
 
-    <script src="../Scripts/contact.js"></script>
+  </section>
+
+  <!-- CHARITY HEADER -->
+  <div class="charity-divider fade-in">
+    <div class="charity-divider__inner">
+      <div>
+        <div class="section-label">Something Bigger</div>
+        <h2 class="section-title">The Charity<br>Drive</h2>
+      </div>
+      <p>Same convoy. Bigger purpose. Whether you're bringing a car or a cause — there's a place for you here.</p>
+    </div>
+  </div>
+
+  <!-- CHARITY FORMS -->
+  <div class="charity-forms fade-in">
+
+    <div class="charity-form-panel">
+      <div class="charity-form-panel__num">01</div>
+      <div class="section-label">Bring the Machine</div>
+      <h3>The Drivers</h3>
+      <p>You bring the car. You bring the presence. Together, we turn motion into impact.</p>
+      <form class="form-block" id="drivers-form">
+        <div class="form-row">
+          <div>
+            <label>Name</label>
+            <input type="text" placeholder="Your name" required>
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div>
+          <label>How you'd like to contribute</label>
+          <textarea placeholder="Car details, availability, anything else..." rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Join Drive</button>
+        <div class="form-success" id="drivers-success">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Locked in. See you on the road.</span>
+        </div>
+      </form>
+    </div>
+
+    <div class="charity-form-panel">
+      <div class="charity-form-panel__num">02</div>
+      <div class="section-label">Bring the Reason</div>
+      <h3>The Cause</h3>
+      <p>You bring the reason. We bring the convoy. Together, we make noise where it matters.</p>
+      <form class="form-block" id="cause-form">
+        <div class="form-row">
+          <div>
+            <label>Name</label>
+            <input type="text" placeholder="Organisation or name" required>
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div>
+          <label>Tell us your cause</label>
+          <textarea placeholder="Who you're helping, what you need, where we'd be going..." rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Submit Cause</button>
+        <div class="form-success" id="cause-success">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Received. We'll reach out soon.</span>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    // Scrolled nav
+    const nav = document.getElementById("nav");
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 60);
+    });
+
+    // Fade-in on scroll
+    const faders = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    faders.forEach(f => observer.observe(f));
+
+    // Form submissions
+    function handleForm(formId, successId) {
+      const form = document.getElementById(formId);
+      const success = document.getElementById(successId);
+      if (!form) return;
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const btn = form.querySelector(".btn-submit");
+        btn.textContent = "Sending…";
+        btn.disabled = true;
+        setTimeout(() => {
+          btn.style.display = "none";
+          success.style.display = "flex";
+        }, 800);
+      });
+    }
+
+    handleForm("membership-form", "membership-success");
+    handleForm("drivers-form", "drivers-success");
+    handleForm("cause-form", "cause-success");
+  </script>
 </body>
-
 </html>
