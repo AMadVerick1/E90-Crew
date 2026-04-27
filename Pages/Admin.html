@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin | E90 Social Club</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Styles/Admin.css">
+</head>
+<body>
+
+  <!-- ─── SIDEBAR ──────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar__logo">
+      <div class="sidebar__logo-mark">E<span>90</span></div>
+      <div class="sidebar__logo-sub">Admin Panel</div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <span class="sidebar__section-label">Overview</span>
+      <button class="sidebar__link active" data-page="dashboard">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </button>
+
+      <span class="sidebar__section-label">Content</span>
+      <button class="sidebar__link" data-page="events">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Events
+        <span class="badge" id="badge-events">3</span>
+      </button>
+
+      <span class="sidebar__section-label">Applications</span>
+      <button class="sidebar__link" data-page="memberships">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Memberships
+        <span class="badge" id="badge-memberships">5</span>
+      </button>
+      <button class="sidebar__link" data-page="drivers">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+        Charity Drivers
+        <span class="badge amber" id="badge-drivers">2</span>
+      </button>
+      <button class="sidebar__link" data-page="causes">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Causes
+        <span class="badge green" id="badge-causes">3</span>
+      </button>
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">
+        <div class="sidebar__avatar">ADM</div>
+        <div>
+          <div class="sidebar__user-name">Admin</div>
+          <div class="sidebar__user-role">Owner</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── MAIN ─────────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="topbar__title" id="page-title">Dashboard</div>
+      <div class="topbar__right">
+        <span class="topbar__date" id="today-date"></span>
+        <button class="topbar__btn" id="topbar-action" onclick="openAddEventModal()">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Event
+        </button>
+      </div>
+    </div>
+
+    <!-- ─── DASHBOARD ─────────────────────────────────── -->
+    <div class="page active" id="page-dashboard">
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card__label">New Applications</div>
+          <div class="stat-card__num blue" id="stat-total">10</div>
+          <div class="stat-card__delta">Across all categories</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-card__label">Memberships</div>
+          <div class="stat-card__num green" id="stat-members">5</div>
+          <div class="stat-card__delta">Awaiting review</div>
+        </div>
+        <div class="stat-card amber">
+          <div class="stat-card__label">Charity Drivers</div>
+          <div class="stat-card__num amber" id="stat-drivers">2</div>
+          <div class="stat-card__delta">Awaiting review</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">Active Events</div>
+          <div class="stat-card__num" id="stat-events">3</div>
+          <div class="stat-card__delta">Published on site</div>
+        </div>
+      </div>
+
+      <!-- Recent activity table -->
+      <div class="block">
+        <div class="block__header">
+          <div class="block__title">Recent Activity</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Message</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="recent-table">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ─── EVENTS ────────────────────────────────────── -->
+    <div class="page" id="page-events">
+
+      <!-- Add event form -->
+      <div class="block">
+        <div class="block__header">
+          <div class="block__title">Add New Event</div>
+        </div>
+        <div class="form-panel">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Event Title</label>
+              <input type="text" id="ev-title" placeholder="e.g. Charity Drive">
+            </div>
+            <div class="form-group">
+              <label>Category</label>
+              <select id="ev-type">
+                <option value="charity">Charity</option>
+                <option value="run">Run</option>
+                <option value="track">Track</option>
+                <option value="social">Social</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="ev-date">
+            </div>
+            <div class="form-group">
+              <label>Time</label>
+              <input type="time" id="ev-time">
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="ev-location" placeholder="e.g. Sizanani Village">
+            </div>
+            <div class="form-group">
+              <label>Spots Available</label>
+              <input type="number" id="ev-spots" placeholder="e.g. 30">
+            </div>
+            <div class="form-group full">
+              <label>Description</label>
+              <textarea id="ev-desc" rows="3" placeholder="What's this run about?"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="form-footer">
+          <button class="btn-sm" onclick="clearEventForm()">Clear</button>
+          <button class="btn-sm primary" onclick="saveEvent()">Publish Event</button>
+        </div>
+      </div>
+
+      <!-- Events list -->
+      <div class="block">
+        <div class="block__header">
+          <div class="block__title">Live Events</div>
+          <div class="block__actions">
+            <span style="font-size:0.7rem;color:var(--muted-light);" id="events-count"></span>
+          </div>
+        </div>
+        <div class="events-admin-grid" id="events-grid">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ─── MEMBERSHIPS ───────────────────────────────── -->
+    <div class="page" id="page-memberships">
+      <div class="block">
+        <div class="block__header">
+          <div class="block__title">Membership Applications</div>
+        </div>
+        <div class="filter-tabs" id="membership-tabs">
+          <button class="filter-tab active" data-filter="all" onclick="filterTable('memberships','all',this)">All <span class="count" id="m-count-all">5</span></button>
+          <button class="filter-tab" data-filter="new" onclick="filterTable('memberships','new',this)">New <span class="count" id="m-count-new">3</span></button>
+          <button class="filter-tab" data-filter="approved" onclick="filterTable('memberships','approved',this)">Approved <span class="count" id="m-count-approved">1</span></button>
+          <button class="filter-tab" data-filter="declined" onclick="filterTable('memberships','declined',this)">Declined <span class="count" id="m-count-declined">1</span></button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Story</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="memberships-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CHARITY DRIVERS ───────────────────────────── -->
+    <div class="page" id="page-drivers">
+      <div class="block">
+        <div class="block__header">
+          <div class="block__title">Charity Driver Applications</div>
+        </div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all" onclick="filterTable('drivers','all',this)">All <span class="count" id="d-count-all">2</span></button>
+          <button class="filter-tab" data-filter="new" onclick="filterTable('drivers','new',this)">New <span class="count" id="d-count-new">2</span></button>
+          <button class="filter-tab" data-filter="approved" onclick="filterTable('drivers','approved',this)">Approved <span class="count" id="d-count-approved">0</span></button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contribution</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="drivers-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── CAUSES ────────────────────────────────────── -->
+    <div class="page" id="page-causes">
+      <div class="block">
+        <div class="block__header">
+          <div class="block__title">Cause Submissions</div>
+        </div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all" onclick="filterTable('causes','all',this)">All <span class="count" id="c-count-all">3</span></button>
+          <button class="filter-tab" data-filter="new" onclick="filterTable('causes','new',this)">New <span class="count" id="c-count-new">2</span></button>
+          <button class="filter-tab" data-filter="pending" onclick="filterTable('causes','pending',this)">In Review <span class="count" id="c-count-pending">1</span></button>
+          <button class="filter-tab" data-filter="approved" onclick="filterTable('causes','approved',this)">Approved <span class="count" id="c-count-approved">0</span></button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name / Org</th>
+                <th>Email</th>
+                <th>Cause</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="causes-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ─── ADD EVENT MODAL ───────────────────────────── -->
+  <div class="modal-backdrop" id="add-event-modal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3>New Event</h3>
+        <button class="modal__close" onclick="closeModal('add-event-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="m-ev-title" placeholder="Event name">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="m-ev-type">
+              <option value="charity">Charity</option>
+              <option value="run">Run</option>
+              <option value="track">Track</option>
+              <option value="social">Social</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="m-ev-date">
+          </div>
+          <div class="form-group">
+            <label>Time</label>
+            <input type="time" id="m-ev-time">
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" id="m-ev-location" placeholder="Location">
+          </div>
+          <div class="form-group">
+            <label>Spots</label>
+            <input type="number" id="m-ev-spots" placeholder="30">
+          </div>
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="m-ev-desc" rows="3" placeholder="What's this run about?"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn-sm" onclick="closeModal('add-event-modal')">Cancel</button>
+        <button class="btn-sm primary" onclick="saveEventFromModal()">Publish Event</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── APPLICATION DETAIL MODAL ─────────────────── -->
+  <div class="modal-backdrop" id="app-detail-modal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 id="app-modal-title">Application</h3>
+        <button class="modal__close" onclick="closeModal('app-detail-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal__body" id="app-modal-body"></div>
+      <div class="modal__footer">
+        <button class="btn-sm danger" id="modal-decline-btn">Decline</button>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn-sm" onclick="closeModal('app-detail-modal')">Close</button>
+          <button class="btn-sm success" id="modal-approve-btn">Approve</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST STACK -->
+  <div class="toast-stack" id="toast-stack"></div>
+
+<script src="../Scripts/Admin.js"></script>
+</body>
+</html>
