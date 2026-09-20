@@ -1,30 +1,20 @@
-// PARALLAX SCROLL EFFECT (road moving)
+// Smooth parallax (subtle, not aggressive)
 window.addEventListener("scroll", () => {
   const scrollY = window.scrollY;
-  const parallax = document.querySelector(".parallax-bg");
+  const road = document.querySelector(".parallax-road");
 
-  if (parallax) {
-    parallax.style.transform = `translateX(-${scrollY * 0.5}px)`;
-  }
+  road.style.transform = `translateX(-${scrollY * 0.3}px)`;
 });
 
-// FADE-IN ON SCROLL
-const elements = document.querySelectorAll(
-  ".the-crew, .crew-image, .our-drive, .invitational-cta"
-);
+// Fade-in
+const elements = document.querySelectorAll(".fade-in");
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.2 });
 
-elements.forEach((el) => {
-  el.classList.add("fade-in");
-  observer.observe(el);
-});
+elements.forEach(el => observer.observe(el));
