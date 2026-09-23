@@ -1,55 +1,34 @@
-// HISTORY SECTION (enter + exit effect)
+// PARALLAX ROAD
+window.addEventListener("scroll", () => {
+  const scrollY = window.scrollY;
+  document.querySelector(".parallax-road").style.transform =
+    `translateX(-${scrollY * 0.3}px)`;
+});
+
+// INTERSECTION OBSERVER
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+    }
+  });
+}, { threshold: 0.3 });
+
+// elements
+document.querySelectorAll(
+  ".history-text, .history-image-wrapper, .mission-overlay, .vibe-card"
+).forEach(el => observer.observe(el));
+
+
+// HISTORY FADE OUT EFFECT
 const historySection = document.querySelector(".history-container");
-const historyText = document.querySelector(".history-text-container");
-const historyImage = document.querySelector(".history-image");
 
-const historyObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        historyText.classList.add("visible");
-        historyImage.classList.add("visible");
-        historySection.classList.remove("fade-out");
-      } else {
-        historySection.classList.add("fade-out");
-      }
-    });
-  },
-  { threshold: 0.3 }
-);
+window.addEventListener("scroll", () => {
+  const rect = historySection.getBoundingClientRect();
 
-historyObserver.observe(historySection);
-
-// MISSION TEXT DROP-IN
-const missionElements = document.querySelectorAll(
-  ".mission-title, .mission-paragraph"
-);
-
-const missionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.4 }
-);
-
-missionElements.forEach((el) => missionObserver.observe(el));
-
-// VIBES FADE UP
-const vibesSections = document.querySelectorAll(".vibes-subsection");
-
-const vibesObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
-
-vibesSections.forEach((el) => vibesObserver.observe(el));
+  if (rect.top < -200) {
+    historySection.classList.add("fade-out");
+  } else {
+    historySection.classList.remove("fade-out");
+  }
+});

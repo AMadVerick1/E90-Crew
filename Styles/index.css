@@ -1,124 +1,201 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  background: #050505;
-  color: white;
-  font-family: "Orbitron", sans-serif;
+  background: #0a0a0a;
+  color: #fff;
   overflow-x: hidden;
 }
 
-/* NAV */
+/* NAVBAR */
 .nav {
   position: fixed;
   width: 100%;
-  padding: 1rem 3rem;
-  display: flex;
-  justify-content: space-between;
-  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
   z-index: 1000;
+  transition: background 0.4s, border-color 0.4s;
 }
 
-.nav a {
-  margin-left: 2rem;
-  color: #aaa;
+.nav.scrolled {
+  background: rgba(5, 5, 5, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.nav__logo {
+  font-family: "Orbitron", sans-serif;
+  font-weight: 900;
+  font-size: 1.4rem;
+  letter-spacing: 4px;
+  color: var(--white);
+}
+
+.nav__logo span {
+  color: var(--blue);
+}
+
+.nav__list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 1rem;
+  gap: 2rem;
+}
+
+.nav__link {
   text-decoration: none;
+  color: #aaa;
+  font-weight: 500;
+  transition: 0.3s ease;
 }
 
-.nav a:hover {
-  color: #00aaff;
+.nav__link:hover,
+.nav__link--active {
+  color: #fff;
+  border-bottom: 2px solid #00aaff;
 }
 
 /* HERO */
-.hero {
+.hero-container {
   height: 100vh;
-  background: url("Assets/luke-schobert-c7FxaoA-jkM-unsplash.jpg") center/cover;
+  background: url("../Assets/luke-schobert-c7FxaoA-jkM-unsplash.jpg") no-repeat center/cover;
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-.hero__content {
-  margin-left: 10%;
-  max-width: 500px;
+.hero-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
 }
 
-.hero h1 {
-  font-size: 4rem;
-  letter-spacing: 4px;
+.hero {
+  position: relative;
+  text-align: center;
+  z-index: 1;
 }
 
-.hero p {
-  margin: 1rem 0;
+.hero__title {
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+.hero__subtitle {
+  margin-top: 1rem;
+  font-size: 1.2rem;
   color: #ccc;
 }
 
-/* BUTTON */
-.cta-button {
-  padding: 0.8rem 2rem;
-  border-radius: 30px;
-  background: #00aaff;
-  text-decoration: none;
-  color: white;
-  display: inline-block;
-}
-
-/* SECTION */
-.section {
+/* SECTION BASE */
+.the-crew-container,
+.our-drive-container,
+.invitational-cta-container {
   padding: 6rem 10%;
-}
-
-.split {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-.split img {
+/* CREW */
+.the-crew-container {
+  background: #111;
+}
+
+.crew-image__image {
   width: 400px;
-  border-radius: 10px;
-  filter: contrast(1.2);
+  border-radius: 12px;
+  transition: transform 0.5s ease;
 }
 
-.center {
+.crew-image__image:hover {
+  transform: scale(1.05);
+}
+
+/* OUR DRIVE */
+.our-drive-container {
+  background: #0d0d0d;
   text-align: center;
+  flex-direction: column;
 }
 
 /* CTA */
-.cta {
-  text-align: center;
+.invitational-cta-container {
   background: linear-gradient(135deg, #001f3f, #003366);
-  padding: 6rem 10%;
+  text-align: center;
+  flex-direction: column;
 }
 
-/* PARALLAX ROAD */
-.parallax-road {
+.invitational-cta__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.invitational-cta__description {
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  padding: 0.8rem 2rem;
+  background: #00aaff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.cta-button:hover {
+  background: #0088cc;
+}
+
+/* PARALLAX ELEMENT (moving background layer) */
+.parallax-bg {
   position: fixed;
-  bottom: 0;
+  top: 0;
+  left: 0;
   width: 200%;
-  height: 120px;
-  background: repeating-linear-gradient(
-    to right,
-    #111 0px,
-    #111 40px,
-    #222 40px,
-    #222 80px
-  );
-  opacity: 0.2;
+  height: 100%;
+  background: url("../Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg") repeat-x;
+  opacity: 0.1;
   z-index: -1;
 }
 
-/* FADE-IN */
+/* SCROLL ANIMATION */
 .fade-in {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .the-crew-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .crew-image__image {
+    width: 100%;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+  }
 }

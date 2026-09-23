@@ -1,0 +1,230 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karzone</title>
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 40px;
+      background: rgba(0, 0, 0, 0.8);
+      position: fixed;
+      width: 100%;
+    }
+
+    .navbar nav a {
+      margin: 0 15px;
+      color: #ccc;
+      text-decoration: none;
+    }
+
+    .cta {
+      background: #001cb8;
+      border: none;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      background: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70') center/cover;
+      display: flex;
+      align-items: flex-end;
+      padding: 60px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+    }
+
+    /* SPLIT */
+    .cta-split {
+      display: flex;
+    }
+
+    .cta-split div {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+      background: #1a1a1a;
+      cursor: pointer;
+    }
+
+    /* ABOUT */
+    .about {
+      padding: 80px;
+    }
+
+    .about h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    /* FEATURED */
+    .featured {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .featured h1 {
+      font-size: 5rem;
+      opacity: 0.1;
+    }
+
+    .featured img {
+      width: 60%;
+      margin: -100px auto;
+    }
+
+    .specs {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    /* BRANDS */
+    .brands {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .brands div {
+      padding: 20px;
+      background: #111;
+      opacity: 0.6;
+    }
+
+    .brands .active {
+      border: 2px solid #e6ff00;
+      opacity: 1;
+    }
+
+    /* SERVICE */
+    .service {
+      display: flex;
+      padding: 80px;
+    }
+
+    .service-img {
+      flex: 1;
+      background: url('https://images.unsplash.com/photo-1502877338535-766e1452684a') center/cover;
+      height: 300px;
+    }
+
+    .service-text {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .service button {
+      margin-top: 20px;
+      background: #e6ff00;
+      border: none;
+      padding: 10px 20px;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="logo">E90</div>
+    <nav>
+      <a href="#">HOME</a>
+      <a href="#">CREW</a>
+      <a href="#">EVENTS</a>
+    </nav>
+    <button class="cta">Contact Us</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Rent the luxury.<br>Own the thrill.</h1>
+    </div>
+  </section>
+
+  <section class="cta-split">
+    <div>Rent a car →</div>
+    <div>Buy a car →</div>
+  </section>
+
+  <section class="about">
+    <h2>From exotic sports cars to luxury sedans and SUVs</h2>
+    <p>
+      Karzone offers an exceptional selection and personalised service.
+    </p>
+  </section>
+
+  <section class="featured">
+    <h1>JAGUAR</h1>
+    <img src="../Assets/IMG-20260406-WA0001.jpg" alt="car" />
+    <div class="specs">
+      <span>450 HP</span>
+      <span>280 KM/H</span>
+      <span>2024</span>
+    </div>
+  </section>
+
+  <section class="brands">
+    <div>Bugatti</div>
+    <div>Ferrari</div>
+    <div class="active">Lamborghini</div>
+    <div>Jaguar</div>
+    <div>Bentley</div>
+  </section>
+
+  <section class="service">
+    <div class="service-img"></div>
+    <div class="service-text">
+      <h2>Superior Customer Service</h2>
+      <p>Experience a seamless luxury journey with expert care.</p>
+      <button>View Details</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Karzone</p>
+  </footer>
+
+  <script>
+    // Simple hover animation effect for brands
+    const brands = document.querySelectorAll(".brands div");
+
+    brands.forEach(brand => {
+      brand.addEventListener("mouseenter", () => {
+        brands.forEach(b => b.classList.remove("active"));
+        brand.classList.add("active");
+      });
+    });
+  </script>
+</body>
+
+</html>
