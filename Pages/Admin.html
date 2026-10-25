@@ -9,6 +9,32 @@
 </head>
 <body>
 
+  <!-- ─── LOGIN OVERLAY ────────────────────────────────── -->
+  <div class="login-overlay hidden" id="login-overlay">
+    <div class="login-card">
+      <div class="login-card__logo">E<span>90</span></div>
+      <div class="login-card__sub">Admin Authentication</div>
+      
+      <div class="login-error" id="login-error">Invalid username or password</div>
+
+      <form id="login-form" onsubmit="handleLoginSubmit(event)">
+        <div class="form-group" style="margin-bottom: 1.2rem;">
+          <label>Username</label>
+          <input type="text" id="login-username" placeholder="admin" required autocomplete="username">
+        </div>
+        <div class="form-group" style="margin-bottom: 1.5rem;">
+          <label>Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="login-btn" id="login-submit-btn">Unlock Dashboard</button>
+      </form>
+
+      <div class="login-hint">
+        Default credentials: <strong>admin</strong> / <strong>admin123</strong>
+      </div>
+    </div>
+  </div>
+
   <!-- ─── SIDEBAR ──────────────────────────────────────── -->
   <aside class="sidebar">
     <div class="sidebar__logo">
@@ -23,38 +49,56 @@
         Dashboard
       </button>
 
-      <span class="sidebar__section-label">Content</span>
+      <span class="sidebar__section-label">Public Site Content</span>
       <button class="sidebar__link" data-page="events">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Events
         <span class="badge" id="badge-events">3</span>
       </button>
+      <button class="sidebar__link" data-page="content">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        Site Content
+      </button>
 
-      <span class="sidebar__section-label">Applications</span>
+      <span class="sidebar__section-label">Applications & Enquiries</span>
       <button class="sidebar__link" data-page="memberships">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         Memberships
-        <span class="badge" id="badge-memberships">5</span>
+        <span class="badge" id="badge-memberships">0</span>
       </button>
       <button class="sidebar__link" data-page="drivers">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
         Charity Drivers
-        <span class="badge amber" id="badge-drivers">2</span>
+        <span class="badge amber" id="badge-drivers">0</span>
       </button>
       <button class="sidebar__link" data-page="causes">
         <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         Causes
-        <span class="badge green" id="badge-causes">3</span>
+        <span class="badge green" id="badge-causes">0</span>
       </button>
+      <button class="sidebar__link" data-page="general">
+        <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        General Enquiries
+        <span class="badge" id="badge-general">0</span>
+      </button>
+
+      <span class="sidebar__section-label">External</span>
+      <a href="/" target="_blank" class="sidebar__link" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        View Public Site
+      </a>
     </nav>
 
     <div class="sidebar__footer">
       <div class="sidebar__user">
-        <div class="sidebar__avatar">ADM</div>
-        <div>
-          <div class="sidebar__user-name">Admin</div>
+        <div class="sidebar__avatar" id="sidebar-avatar">ADM</div>
+        <div style="flex:1;">
+          <div class="sidebar__user-name" id="sidebar-username">Admin</div>
           <div class="sidebar__user-role">Owner</div>
         </div>
+        <button class="sidebar__logout-btn" onclick="handleLogout()" title="Log Out">
+          <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
       </div>
     </div>
   </aside>
@@ -80,22 +124,22 @@
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-card__label">New Applications</div>
-          <div class="stat-card__num blue" id="stat-total">10</div>
+          <div class="stat-card__num blue" id="stat-total">0</div>
           <div class="stat-card__delta">Across all categories</div>
         </div>
         <div class="stat-card green">
           <div class="stat-card__label">Memberships</div>
-          <div class="stat-card__num green" id="stat-members">5</div>
+          <div class="stat-card__num green" id="stat-members">0</div>
           <div class="stat-card__delta">Awaiting review</div>
         </div>
         <div class="stat-card amber">
           <div class="stat-card__label">Charity Drivers</div>
-          <div class="stat-card__num amber" id="stat-drivers">2</div>
+          <div class="stat-card__num amber" id="stat-drivers">0</div>
           <div class="stat-card__delta">Awaiting review</div>
         </div>
         <div class="stat-card">
           <div class="stat-card__label">Active Events</div>
-          <div class="stat-card__num" id="stat-events">3</div>
+          <div class="stat-card__num" id="stat-events">0</div>
           <div class="stat-card__delta">Published on site</div>
         </div>
       </div>
@@ -103,7 +147,10 @@
       <!-- Recent activity table -->
       <div class="block">
         <div class="block__header">
-          <div class="block__title">Recent Activity</div>
+          <div class="block__title">Recent Applications & Enquiries</div>
+          <div class="block__actions">
+            <button class="btn-sm" onclick="fetchAllData()">Refresh Live</button>
+          </div>
         </div>
         <div class="table-wrap">
           <table>
@@ -111,13 +158,14 @@
               <tr>
                 <th>Name</th>
                 <th>Type</th>
-                <th>Message</th>
+                <th>Message / Story</th>
                 <th>Received</th>
                 <th>Status</th>
-                <th></th>
+                <th>Quick Actions</th>
               </tr>
             </thead>
             <tbody id="recent-table">
+              <tr><td colspan="6"><div class="empty-state"><p>Loading live activity…</p></div></td></tr>
             </tbody>
           </table>
         </div>
@@ -137,13 +185,13 @@
           <div class="form-grid">
             <div class="form-group">
               <label>Event Title</label>
-              <input type="text" id="ev-title" placeholder="e.g. Charity Drive">
+              <input type="text" id="ev-title" placeholder="e.g. Kyalami Circuit Track Day">
             </div>
             <div class="form-group">
               <label>Category</label>
               <select id="ev-type">
-                <option value="charity">Charity</option>
                 <option value="run">Run</option>
+                <option value="charity">Charity</option>
                 <option value="track">Track</option>
                 <option value="social">Social</option>
               </select>
@@ -154,37 +202,205 @@
             </div>
             <div class="form-group">
               <label>Time</label>
-              <input type="time" id="ev-time">
+              <input type="time" id="ev-time" value="08:00">
             </div>
             <div class="form-group">
               <label>Location</label>
-              <input type="text" id="ev-location" placeholder="e.g. Sizanani Village">
+              <input type="text" id="ev-location" placeholder="e.g. Kyalami Grand Prix Circuit">
             </div>
             <div class="form-group">
               <label>Spots Available</label>
-              <input type="number" id="ev-spots" placeholder="e.g. 30">
+              <input type="number" id="ev-spots" placeholder="e.g. 25">
+            </div>
+            <div class="form-group">
+              <label>Image Path / URL</label>
+              <input type="text" id="ev-image" placeholder="../Assets/IMG-20260406-WA0000.jpg" value="../Assets/IMG-20260406-WA0000.jpg">
+            </div>
+            <div class="form-group">
+              <label>Published Status</label>
+              <select id="ev-published">
+                <option value="1">Published (Live on Public Site)</option>
+                <option value="0">Draft (Hidden)</option>
+              </select>
             </div>
             <div class="form-group full">
               <label>Description</label>
-              <textarea id="ev-desc" rows="3" placeholder="What's this run about?"></textarea>
+              <textarea id="ev-desc" rows="3" placeholder="Describe the convoy, meetup point, and guidelines..."></textarea>
             </div>
           </div>
         </div>
         <div class="form-footer">
           <button class="btn-sm" onclick="clearEventForm()">Clear</button>
-          <button class="btn-sm primary" onclick="saveEvent()">Publish Event</button>
+          <button class="btn-sm primary" onclick="saveEvent()">Publish Event to Public Site</button>
         </div>
       </div>
 
       <!-- Events list -->
       <div class="block">
         <div class="block__header">
-          <div class="block__title">Live Events</div>
+          <div class="block__title">Live Public Events</div>
           <div class="block__actions">
             <span style="font-size:0.7rem;color:var(--muted-light);" id="events-count"></span>
           </div>
         </div>
         <div class="events-admin-grid" id="events-grid">
+          <div class="empty-state" style="grid-column:1/-1"><p>Loading live events…</p></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ─── SITE CONTENT MANAGEMENT (NEW) ─────────────── -->
+    <div class="page" id="page-content">
+      
+      <div class="block">
+        <div class="block__header">
+          <div>
+            <div class="block__title">Public Site Details & Content Editor</div>
+            <p style="font-size:0.75rem;color:var(--muted-light);margin-top:0.25rem;">
+              Modify live headings, descriptions, vibes cards, and perks visible across the public website.
+            </p>
+          </div>
+          <div class="block__actions">
+            <button class="btn-sm primary" onclick="saveSiteContent()">Save All Site Texts</button>
+          </div>
+        </div>
+
+        <div class="content-subnav">
+          <button class="content-tab-btn active" onclick="switchContentSubpage('home', this)">Home Page</button>
+          <button class="content-tab-btn" onclick="switchContentSubpage('about', this)">Crew & Mission</button>
+          <button class="content-tab-btn" onclick="switchContentSubpage('vibes', this)">The Vibes Cards</button>
+          <button class="content-tab-btn" onclick="switchContentSubpage('perks', this)">Membership Perks</button>
+          <button class="content-tab-btn" onclick="switchContentSubpage('contact', this)">Club Contacts</button>
+        </div>
+
+        <!-- Subpage: Home -->
+        <div class="content-subpage active" id="subpage-home">
+          <div class="form-panel">
+            <div class="form-grid">
+              <div class="form-group full">
+                <label>Hero Main Title</label>
+                <input type="text" id="cnt-hero_title">
+              </div>
+              <div class="form-group full">
+                <label>Hero Subtitle / Tagline</label>
+                <input type="text" id="cnt-hero_subtitle">
+              </div>
+              <div class="form-group">
+                <label>The Crew Section Title</label>
+                <input type="text" id="cnt-crew_title">
+              </div>
+              <div class="form-group full">
+                <label>The Crew Description</label>
+                <textarea id="cnt-crew_desc" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Our Drive Section Title</label>
+                <input type="text" id="cnt-drive_title">
+              </div>
+              <div class="form-group full">
+                <label>Our Drive Description</label>
+                <textarea id="cnt-drive_desc" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>CTA Section Title</label>
+                <input type="text" id="cnt-cta_title">
+              </div>
+              <div class="form-group full">
+                <label>CTA Description</label>
+                <textarea id="cnt-cta_desc" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subpage: About -->
+        <div class="content-subpage" id="subpage-about">
+          <div class="form-panel">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Club Establishment Badge</label>
+                <input type="text" id="cnt-club_badge">
+              </div>
+              <div class="form-group">
+                <label>The Club Title</label>
+                <input type="text" id="cnt-club_title">
+              </div>
+              <div class="form-group full">
+                <label>The Club Story — Paragraph 1</label>
+                <textarea id="cnt-club_p1" rows="3"></textarea>
+              </div>
+              <div class="form-group full">
+                <label>The Club Story — Paragraph 2</label>
+                <textarea id="cnt-club_p2" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Mission Label</label>
+                <input type="text" id="cnt-mission_badge">
+              </div>
+              <div class="form-group">
+                <label>Mission Title</label>
+                <input type="text" id="cnt-mission_title">
+              </div>
+              <div class="form-group full">
+                <label>Mission Statement</label>
+                <textarea id="cnt-mission_desc" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subpage: Vibes -->
+        <div class="content-subpage" id="subpage-vibes">
+          <div class="form-panel">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+              <div>
+                <h4 style="font-size:0.9rem;font-weight:600;">"How We Move" Vibes Cards</h4>
+                <p style="font-size:0.75rem;color:var(--muted-light);">These display on the public Crew page.</p>
+              </div>
+              <button class="btn-sm primary" onclick="openAddVibeModal()">+ Add New Vibe Card</button>
+            </div>
+            <div class="events-admin-grid" id="vibes-admin-grid"></div>
+          </div>
+        </div>
+
+        <!-- Subpage: Perks -->
+        <div class="content-subpage" id="subpage-perks">
+          <div class="form-panel">
+            <h4 style="font-size:0.9rem;font-weight:600;">Membership Perks List</h4>
+            <p style="font-size:0.75rem;color:var(--muted-light);margin-bottom:1.2rem;">These bullet points display under "Become a Member" on the Join page.</p>
+            
+            <div style="display:flex;gap:0.75rem;margin-bottom:1.5rem;">
+              <input type="text" id="new-perk-input" placeholder="e.g. VIP parking access at sanctioned track days" style="flex:1;">
+              <button class="btn-sm primary" onclick="addPerk()">Add Perk</button>
+            </div>
+
+            <div class="perks-list" id="perks-admin-list"></div>
+          </div>
+        </div>
+
+        <!-- Subpage: Contact -->
+        <div class="content-subpage" id="subpage-contact">
+          <div class="form-panel">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>City / Location</label>
+                <input type="text" id="cnt-contact_city">
+              </div>
+              <div class="form-group">
+                <label>Official Email</label>
+                <input type="email" id="cnt-contact_email">
+              </div>
+              <div class="form-group full">
+                <label>Footer Tagline</label>
+                <input type="text" id="cnt-contact_tagline">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button class="btn-sm primary" onclick="saveSiteContent()">Save All Site Texts</button>
         </div>
       </div>
 
@@ -196,11 +412,17 @@
         <div class="block__header">
           <div class="block__title">Membership Applications</div>
         </div>
+
+        <div class="table-search-bar">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="table-search-input" placeholder="Search applicant name, email, or story..." oninput="handleSearch('memberships', this.value)">
+        </div>
+
         <div class="filter-tabs" id="membership-tabs">
-          <button class="filter-tab active" data-filter="all" onclick="filterTable('memberships','all',this)">All <span class="count" id="m-count-all">5</span></button>
-          <button class="filter-tab" data-filter="new" onclick="filterTable('memberships','new',this)">New <span class="count" id="m-count-new">3</span></button>
-          <button class="filter-tab" data-filter="approved" onclick="filterTable('memberships','approved',this)">Approved <span class="count" id="m-count-approved">1</span></button>
-          <button class="filter-tab" data-filter="declined" onclick="filterTable('memberships','declined',this)">Declined <span class="count" id="m-count-declined">1</span></button>
+          <button class="filter-tab active" data-filter="all" onclick="filterTable('memberships','all',this)">All <span class="count" id="m-count-all">0</span></button>
+          <button class="filter-tab" data-filter="new" onclick="filterTable('memberships','new',this)">New <span class="count" id="m-count-new">0</span></button>
+          <button class="filter-tab" data-filter="approved" onclick="filterTable('memberships','approved',this)">Approved <span class="count" id="m-count-approved">0</span></button>
+          <button class="filter-tab" data-filter="declined" onclick="filterTable('memberships','declined',this)">Declined <span class="count" id="m-count-declined">0</span></button>
         </div>
         <div class="table-wrap">
           <table>
@@ -226,10 +448,17 @@
         <div class="block__header">
           <div class="block__title">Charity Driver Applications</div>
         </div>
+
+        <div class="table-search-bar">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="table-search-input" placeholder="Search driver name, email, or contribution..." oninput="handleSearch('drivers', this.value)">
+        </div>
+
         <div class="filter-tabs">
-          <button class="filter-tab active" data-filter="all" onclick="filterTable('drivers','all',this)">All <span class="count" id="d-count-all">2</span></button>
-          <button class="filter-tab" data-filter="new" onclick="filterTable('drivers','new',this)">New <span class="count" id="d-count-new">2</span></button>
+          <button class="filter-tab active" data-filter="all" onclick="filterTable('drivers','all',this)">All <span class="count" id="d-count-all">0</span></button>
+          <button class="filter-tab" data-filter="new" onclick="filterTable('drivers','new',this)">New <span class="count" id="d-count-new">0</span></button>
           <button class="filter-tab" data-filter="approved" onclick="filterTable('drivers','approved',this)">Approved <span class="count" id="d-count-approved">0</span></button>
+          <button class="filter-tab" data-filter="declined" onclick="filterTable('drivers','declined',this)">Declined <span class="count" id="d-count-declined">0</span></button>
         </div>
         <div class="table-wrap">
           <table>
@@ -255,11 +484,18 @@
         <div class="block__header">
           <div class="block__title">Cause Submissions</div>
         </div>
+
+        <div class="table-search-bar">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="table-search-input" placeholder="Search organisation, email, or cause..." oninput="handleSearch('causes', this.value)">
+        </div>
+
         <div class="filter-tabs">
-          <button class="filter-tab active" data-filter="all" onclick="filterTable('causes','all',this)">All <span class="count" id="c-count-all">3</span></button>
-          <button class="filter-tab" data-filter="new" onclick="filterTable('causes','new',this)">New <span class="count" id="c-count-new">2</span></button>
-          <button class="filter-tab" data-filter="pending" onclick="filterTable('causes','pending',this)">In Review <span class="count" id="c-count-pending">1</span></button>
+          <button class="filter-tab active" data-filter="all" onclick="filterTable('causes','all',this)">All <span class="count" id="c-count-all">0</span></button>
+          <button class="filter-tab" data-filter="new" onclick="filterTable('causes','new',this)">New <span class="count" id="c-count-new">0</span></button>
+          <button class="filter-tab" data-filter="pending" onclick="filterTable('causes','pending',this)">In Review <span class="count" id="c-count-pending">0</span></button>
           <button class="filter-tab" data-filter="approved" onclick="filterTable('causes','approved',this)">Approved <span class="count" id="c-count-approved">0</span></button>
+          <button class="filter-tab" data-filter="declined" onclick="filterTable('causes','declined',this)">Declined <span class="count" id="c-count-declined">0</span></button>
         </div>
         <div class="table-wrap">
           <table>
@@ -267,13 +503,48 @@
               <tr>
                 <th>Name / Org</th>
                 <th>Email</th>
-                <th>Cause</th>
+                <th>Cause Details</th>
                 <th>Received</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody id="causes-table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── GENERAL ENQUIRIES ─────────────────────────── -->
+    <div class="page" id="page-general">
+      <div class="block">
+        <div class="block__header">
+          <div class="block__title">General Enquiries & Contact Requests</div>
+        </div>
+
+        <div class="table-search-bar">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="table-search-input" placeholder="Search general enquiry sender or message..." oninput="handleSearch('general', this.value)">
+        </div>
+
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all" onclick="filterTable('general','all',this)">All <span class="count" id="g-count-all">0</span></button>
+          <button class="filter-tab" data-filter="new" onclick="filterTable('general','new',this)">New <span class="count" id="g-count-new">0</span></button>
+          <button class="filter-tab" data-filter="approved" onclick="filterTable('general','approved',this)">Responded <span class="count" id="g-count-approved">0</span></button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Sender</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="general-table"></tbody>
           </table>
         </div>
       </div>
@@ -311,7 +582,7 @@
           </div>
           <div class="form-group">
             <label>Time</label>
-            <input type="time" id="m-ev-time">
+            <input type="time" id="m-ev-time" value="08:00">
           </div>
           <div class="form-group">
             <label>Location</label>
@@ -334,6 +605,111 @@
     </div>
   </div>
 
+  <!-- ─── EDIT EVENT MODAL (NEW) ────────────────────── -->
+  <div class="modal-backdrop" id="edit-event-modal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3>Edit Event</h3>
+        <button class="modal__close" onclick="closeModal('edit-event-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <input type="hidden" id="edit-ev-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" id="edit-ev-title">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="edit-ev-type">
+              <option value="run">Run</option>
+              <option value="charity">Charity</option>
+              <option value="track">Track</option>
+              <option value="social">Social</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="edit-ev-date">
+          </div>
+          <div class="form-group">
+            <label>Time</label>
+            <input type="time" id="edit-ev-time">
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" id="edit-ev-location">
+          </div>
+          <div class="form-group">
+            <label>Spots</label>
+            <input type="number" id="edit-ev-spots">
+          </div>
+          <div class="form-group">
+            <label>Image Path / URL</label>
+            <input type="text" id="edit-ev-image">
+          </div>
+          <div class="form-group">
+            <label>Publication Status</label>
+            <select id="edit-ev-published">
+              <option value="1">Published (Live)</option>
+              <option value="0">Draft (Hidden)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="edit-ev-desc" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn-sm danger" onclick="deleteEventFromEditModal()">Delete Event</button>
+        <div style="display:flex;gap:.5rem">
+          <button class="btn-sm" onclick="closeModal('edit-event-modal')">Cancel</button>
+          <button class="btn-sm primary" onclick="updateEventFromModal()">Update Event</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ADD VIBE MODAL ────────────────────────────── -->
+  <div class="modal-backdrop" id="add-vibe-modal">
+    <div class="modal">
+      <div class="modal__header">
+        <h3>Add Public Vibe Card</h3>
+        <button class="modal__close" onclick="closeModal('add-vibe-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal__body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Vibe Title</label>
+            <input type="text" id="vibe-title" placeholder="e.g. Tunnel Runs">
+          </div>
+          <div class="form-group">
+            <label>Icon Type</label>
+            <select id="vibe-icon">
+              <option value="sun">Sun (Sunrise / Morning)</option>
+              <option value="heart">Heart (Charity / Giving)</option>
+              <option value="headphones">Road / Sound</option>
+              <option value="award">Track / Flag</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="vibe-desc" rows="3" placeholder="Describe the vibe..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn-sm" onclick="closeModal('add-vibe-modal')">Cancel</button>
+        <button class="btn-sm primary" onclick="saveVibe()">Add Vibe Card</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ─── APPLICATION DETAIL MODAL ─────────────────── -->
   <div class="modal-backdrop" id="app-detail-modal">
     <div class="modal">
@@ -344,10 +720,23 @@
         </button>
       </div>
       <div class="modal__body" id="app-modal-body"></div>
+      
+      <!-- Admin Notes Section -->
+      <div style="padding: 0 1.8rem 1.2rem;">
+        <label style="font-size:0.6rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:0.4rem;">Admin Internal Notes</label>
+        <div style="display:flex;gap:0.5rem;">
+          <input type="text" id="app-admin-notes" placeholder="Add private notes (e.g. called applicant, confirmed car specs)..." style="flex:1;">
+          <button class="btn-sm" onclick="saveAdminNotes()">Save Note</button>
+        </div>
+      </div>
+
       <div class="modal__footer">
-        <button class="btn-sm danger" id="modal-decline-btn">Decline</button>
+        <div style="display:flex;gap:0.5rem;">
+          <button class="btn-sm danger" id="modal-decline-btn">Decline</button>
+          <button class="btn-sm" id="modal-pending-btn" style="display:none;">Mark In Review</button>
+        </div>
         <div style="display:flex;gap:.5rem">
-          <button class="btn-sm" onclick="closeModal('app-detail-modal')">Close</button>
+          <button class="btn-sm" onclick="deleteCurrentEnquiry()" style="color:var(--muted-light)">Delete</button>
           <button class="btn-sm success" id="modal-approve-btn">Approve</button>
         </div>
       </div>

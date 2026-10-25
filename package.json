@@ -1,0 +1,28 @@
+{
+  "name": "e90-crew",
+  "version": "1.0.0",
+  "description": "Full-stack web application for E90 Social Club with admin CRUD and enquiry management",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AMadVerick1/E90-Crew.git"
+  },
+  "keywords": [
+    "bmw",
+    "e90",
+    "social-club",
+    "full-stack",
+    "express",
+    "sqlite"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

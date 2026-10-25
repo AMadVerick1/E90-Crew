@@ -16,13 +16,14 @@
       <a href="index.html" class="nav__link">Home</a>
       <a href="about.html" class="nav__link">Crew</a>
       <a href="contact.html" class="nav__link nav__link--active">Join</a>
+      <a href="Admin.html" class="nav__link" style="opacity: 0.6;">Admin</a>
     </nav>
   </header>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero__content fade-in">
-      <div class="hero__eyebrow">E90 Social Club — Johannesburg</div>
+      <div class="hero__eyebrow" id="contact-eyebrow">E90 Social Club — Johannesburg</div>
       <h1>Join<br>the <em>Convoy</em></h1>
       <p class="hero__sub">
         Not everyone gets it.
@@ -65,21 +66,21 @@
         <div class="form-row">
           <div>
             <label>Name</label>
-            <input type="text" placeholder="Your name" required>
+            <input type="text" name="name" placeholder="Your name" required>
           </div>
           <div>
             <label>Email</label>
-            <input type="email" placeholder="your@email.com" required>
+            <input type="email" name="email" placeholder="your@email.com" required>
           </div>
         </div>
         <div>
           <label>Your Story</label>
-          <textarea placeholder="How did the E90 find you?" rows="4"></textarea>
+          <textarea name="message" placeholder="How did the E90 find you?" rows="4" required></textarea>
         </div>
         <button type="submit" class="btn-submit">Send It</button>
         <div class="form-success" id="membership-success">
           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>We've got you. We'll be in touch.</span>
+          <span>We've got you. Application stored — we'll be in touch!</span>
         </div>
       </form>
     </div>
@@ -109,21 +110,21 @@
         <div class="form-row">
           <div>
             <label>Name</label>
-            <input type="text" placeholder="Your name" required>
+            <input type="text" name="name" placeholder="Your name" required>
           </div>
           <div>
             <label>Email</label>
-            <input type="email" placeholder="your@email.com" required>
+            <input type="email" name="email" placeholder="your@email.com" required>
           </div>
         </div>
         <div>
           <label>How you'd like to contribute</label>
-          <textarea placeholder="Car details, availability, anything else..." rows="3"></textarea>
+          <textarea name="message" placeholder="Car details, availability, anything else..." rows="3" required></textarea>
         </div>
         <button type="submit" class="btn-submit">Join Drive</button>
         <div class="form-success" id="drivers-success">
           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>Locked in. See you on the road.</span>
+          <span>Locked in. Driver application stored — see you on the road.</span>
         </div>
       </form>
     </div>
@@ -137,66 +138,41 @@
         <div class="form-row">
           <div>
             <label>Name</label>
-            <input type="text" placeholder="Organisation or name" required>
+            <input type="text" name="name" placeholder="Organisation or name" required>
           </div>
           <div>
             <label>Email</label>
-            <input type="email" placeholder="your@email.com" required>
+            <input type="email" name="email" placeholder="your@email.com" required>
           </div>
         </div>
         <div>
           <label>Tell us your cause</label>
-          <textarea placeholder="Who you're helping, what you need, where we'd be going..." rows="3"></textarea>
+          <textarea name="message" placeholder="Who you're helping, what you need, where we'd be going..." rows="3" required></textarea>
         </div>
         <button type="submit" class="btn-submit">Submit Cause</button>
         <div class="form-success" id="cause-success">
           <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>Received. We'll reach out soon.</span>
+          <span>Received. Cause application stored — we'll review and reach out soon.</span>
         </div>
       </form>
     </div>
 
   </div>
 
-  <script>
-    // Scrolled nav
-    const nav = document.getElementById("nav");
-    window.addEventListener("scroll", () => {
-      nav.classList.toggle("scrolled", window.scrollY > 60);
-    }); 
+  <!-- FOOTER -->
+  <footer style="padding: 4rem 2rem 3rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 4rem; background: #070707;">
+    <div style="font-family:'Orbitron',sans-serif; font-size:1.1rem; letter-spacing:3px; margin-bottom:0.75rem;">
+      E<span style="color:#00aaff;">90</span> SOCIAL CLUB
+    </div>
+    <p style="color:#777; font-size:0.8rem; margin-bottom:1.5rem;">Johannesburg, South Africa • Sharing the Good Vibes</p>
+    <div style="display:flex; justify-content:center; gap:1.5rem; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px;">
+      <a href="index.html" style="color:#888; text-decoration:none;">Home</a>
+      <a href="about.html" style="color:#888; text-decoration:none;">Crew</a>
+      <a href="contact.html" style="color:#888; text-decoration:none;">Join</a>
+      <a href="Admin.html" style="color:#00aaff; text-decoration:none;">Admin Portal</a>
+    </div>
+  </footer>
 
-    // Fade-in on scroll
-    const faders = document.querySelectorAll(".fade-in");
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add("visible");
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    faders.forEach(f => observer.observe(f));
-
-    // Form submissions
-    function handleForm(formId, successId) {
-      const form = document.getElementById(formId);
-      const success = document.getElementById(successId);
-      if (!form) return;
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const btn = form.querySelector(".btn-submit");
-        btn.textContent = "Sending…";
-        btn.disabled = true;
-        setTimeout(() => {
-          btn.style.display = "none";
-          success.style.display = "flex";
-        }, 800);
-      });
-    }
-
-    handleForm("membership-form", "membership-success");
-    handleForm("drivers-form", "drivers-success");
-    handleForm("cause-form", "cause-success");
-  </script>
+  <script src="../Scripts/contact.js"></script>
 </body>
 </html>

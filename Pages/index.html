@@ -1,76 +1,113 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="../Styles/index.css" />
-  </head>
-  <body>
-    <!-- Home Page for the BMW E90 social club -->
-    <!-- Have a background that trails an E90 across the page through each page, parallaxing effect to mimic going on a journey with the crew -->
-    <!-- Have a navigation bar, with links to each page -->
-    <!-- Have a hero section, with a title and a tagline that sums up the site -->
-    <!-- Have a who we are section, brief overview of the social club -->
-    <!-- Have a section of what they do (breakfast runs and charity runs), and why they do it (share the good vibes) -->
-    <!-- Have an invitational cta section (join the ride), button linked to the contact page -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E90 Social Club | BMW E90 Community</title>
+  <link rel="stylesheet" href="../Styles/index.css" />
+</head>
+<body>
 
-    <!-- Navigation -->
-    <header>
-      <nav class="nav">
-        <ul class="nav__list">
-          <li class="nav__item">
-            <a href="index.html" class="nav__link nav__link--active">Home</a>
-          </li>
-          <li class="nav__item">
-            <a href="about.html" class="nav__link">About</a>
-          </li>
-          <li class="nav__item">
-            <a href="contact.html" class="nav__link">Contact</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__logo">E<span>90</span></a>
+    <nav class="nav__links">
+      <a href="index.html" class="nav__link nav__link--active">Home</a>
+      <a href="about.html" class="nav__link">Crew</a>
+      <a href="contact.html" class="nav__link">Join</a>
+      <a href="Admin.html" class="nav__link" style="opacity: 0.6;">Admin</a>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-
-    <div class="hero-container">
-      <div class="hero">
-        <h1 class="hero__title">BMW E90 Social Club</h1>
-        <p class="hero__subtitle">Sharing the Good Vibes</p>
+  <!-- Hero Section -->
+  <div class="hero-container">
+    <div class="hero fade-in">
+      <div class="hero__eyebrow">Johannesburg, South Africa</div>
+      <h1 class="hero__title" id="home-hero-title">BMW E90 Social Club</h1>
+      <p class="hero__subtitle" id="home-hero-subtitle">Sharing the Good Vibes</p>
+      <div style="display:flex; justify-content:center; gap:1rem;">
+        <a href="contact.html" class="btn-primary">Join the Convoy</a>
+        <a href="about.html" class="btn-primary" style="background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.2); box-shadow:none;">Explore Crew</a>
       </div>
     </div>
+  </div>
 
-    <div class="the-crew-container">
-      <div class="the-crew">
-        <h2 class="the-crew__title">The Crew</h2>
-        <p class="the-crew__description">
-          From an idea to a community driven by a common goal, the spirit of the BMW E90. The social club 
-        </p>
-      </div>
-      <div class="crew-image">
-        <img src="../Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg" alt="The Crew" class="crew-image__image" />
+  <!-- The Crew Section -->
+  <section class="the-crew-container fade-in">
+    <div class="the-crew">
+      <div class="section-label">Who We Are</div>
+      <h2 class="the-crew__title" id="home-crew-title">The Crew</h2>
+      <p class="the-crew__description" id="home-crew-desc">
+        From an idea to a community driven by a common goal: celebrating the spirit, timeless aesthetic, and pure driving dynamics of the BMW E90 3 Series.
+      </p>
+      <div style="margin-top: 1.8rem;">
+        <a href="about.html" style="color:var(--blue); font-size:0.8rem; text-decoration:none; font-family:'Orbitron',sans-serif; letter-spacing:1px; text-transform:uppercase;">
+          Read Our Full Story →
+        </a>
       </div>
     </div>
+    <div class="crew-image">
+      <img src="../Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg" alt="The Crew" class="crew-image__image" />
+    </div>
+  </section>
 
-    <div class="our-drive-container">
-      <div class="our-drive">
-        <h2 class="our-drive__title">Our Drive</h2>
-        <p class="our-drive__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.
-        </p>
+  <!-- Our Drive Section -->
+  <section class="our-drive-container fade-in">
+    <div class="our-drive">
+      <div class="section-label">What Drives Us</div>
+      <h2 class="our-drive__title" id="home-drive-title">Our Drive</h2>
+      <p class="our-drive__description" id="home-drive-desc">
+        We don't just park and pose. We move with purpose — from sunrise breakfast runs through twisting mountain passes to charity drives that uplift local communities.
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Upcoming Events Section -->
+  <section class="featured-events fade-in">
+    <div class="featured-events__header">
+      <div>
+        <div class="section-label">Lock In Your Spot</div>
+        <h2 style="font-family:'Orbitron',sans-serif; font-size:2rem; text-transform:uppercase;">Upcoming Convoys</h2>
       </div>
+      <a href="about.html" style="color:var(--blue); font-size:0.8rem; text-decoration:none; font-family:'Orbitron',sans-serif; letter-spacing:1px; text-transform:uppercase;">
+        View All Events →
+      </a>
     </div>
 
-    <div class="invitational-cta-container">
-      <div class="invitational-cta">
-        <h2 class="invitational-cta__title">Invitational CTA</h2>
-        <p class="invitational-cta__description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia.
-        </p>
+    <div class="events-home-grid" id="home-events-grid">
+      <!-- Dynamically populated from backend -->
+      <div style="grid-column: 1/-1; text-align: center; color: var(--muted); padding: 2rem;">
+        Loading live upcoming convoys…
       </div>
     </div>
-  </body>
+  </section>
+
+  <!-- Invitational CTA Section -->
+  <section class="invitational-cta-container fade-in">
+    <div class="invitational-cta">
+      <div class="section-label">Open Invitation</div>
+      <h2 class="invitational-cta__title" id="home-cta-title">Join the Convoy</h2>
+      <p class="invitational-cta__description" id="home-cta-desc">
+        Whether you daily a 320d, open the taps on an inline-six 330i, push boost in a 335i, or rev out a V8 M3 — you have a home with us.
+      </p>
+      <a href="contact.html" class="btn-primary">Become a Member</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div style="font-family:'Orbitron',sans-serif; font-size:1.1rem; letter-spacing:3px; margin-bottom:0.75rem;">
+      E<span style="color:#00aaff;">90</span> SOCIAL CLUB
+    </div>
+    <p style="color:#777; font-size:0.8rem; margin-bottom:1.5rem;">Johannesburg, South Africa • Sharing the Good Vibes</p>
+    <div style="display:flex; justify-content:center; gap:1.5rem; font-size:0.75rem; text-transform:uppercase; letter-spacing:1px;">
+      <a href="index.html" style="color:#888; text-decoration:none;">Home</a>
+      <a href="about.html" style="color:#888; text-decoration:none;">Crew</a>
+      <a href="contact.html" style="color:#888; text-decoration:none;">Join</a>
+      <a href="Admin.html" style="color:#00aaff; text-decoration:none;">Admin Portal</a>
+    </div>
+  </footer>
 
   <script src="../Scripts/index.js"></script>
+</body>
 </html>

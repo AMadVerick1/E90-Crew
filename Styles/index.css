@@ -1,14 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
 /* Reset */
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+}
+
+:root {
+  --blue: #00aaff;
+  --blue-dim: rgba(0, 170, 255, 0.10);
+  --blue-border: rgba(0, 170, 255, 0.25);
+  --white: #ffffff;
+  --off-white: #e8e8e8;
+  --muted: #888;
+  --dark: #050505;
+  --card-bg: #0d0d0d;
+  --card-border: rgba(255, 255, 255, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: #0a0a0a;
-  color: #fff;
+  background: var(--dark);
+  color: var(--white);
+  font-family: "Inter", sans-serif;
   overflow-x: hidden;
 }
 
@@ -16,10 +34,10 @@ body {
 .nav {
   position: fixed;
   width: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px);
+  padding: 1.2rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 1000;
   transition: background 0.4s, border-color 0.4s;
 }
@@ -36,31 +54,38 @@ body {
   font-size: 1.4rem;
   letter-spacing: 4px;
   color: var(--white);
+  text-decoration: none;
 }
 
 .nav__logo span {
   color: var(--blue);
 }
 
-.nav__list {
+.nav__links {
   display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 1rem;
-  gap: 2rem;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav__link {
-  text-decoration: none;
-  color: #aaa;
+  font-family: "Inter", sans-serif;
+  font-size: 0.78rem;
   font-weight: 500;
-  transition: 0.3s ease;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.45rem 1.2rem;
+  border-radius: 50px;
+  border: 1px solid transparent;
+  transition: all 0.3s;
 }
 
 .nav__link:hover,
 .nav__link--active {
-  color: #fff;
-  border-bottom: 2px solid #00aaff;
+  color: var(--white);
+  border-color: var(--blue-border);
+  background: var(--blue-dim);
 }
 
 /* HERO */
@@ -71,105 +96,244 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  text-align: center;
+  padding: 0 1.5rem;
 }
 
 .hero-container::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at center, rgba(5, 5, 5, 0.4) 0%, rgba(5, 5, 5, 0.85) 100%);
 }
 
 .hero {
   position: relative;
-  text-align: center;
   z-index: 1;
+  max-width: 800px;
+}
+
+.hero__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1rem;
 }
 
 .hero__title {
-  font-size: 3rem;
-  letter-spacing: 2px;
+  font-family: "Orbitron", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 1.2rem;
 }
 
 .hero__subtitle {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  color: #ccc;
+  font-size: 1.15rem;
+  color: var(--off-white);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  font-weight: 300;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.9rem 2.4rem;
+  background: var(--blue);
+  color: var(--dark);
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 25px rgba(0, 170, 255, 0.3);
+}
+
+.btn-primary:hover {
+  background: #33bbff;
+  transform: translateY(-2px);
+  box-shadow: 0 0 35px rgba(0, 170, 255, 0.5);
 }
 
 /* SECTION BASE */
 .the-crew-container,
-.our-drive-container,
-.invitational-cta-container {
-  padding: 6rem 10%;
+.our-drive-container {
+  padding: 7rem 10%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 4rem;
 }
 
-/* CREW */
+.section-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.75rem;
+}
+
+.the-crew__title,
+.our-drive__title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.4rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.the-crew__description,
+.our-drive__description {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 550px;
+}
+
 .the-crew-container {
-  background: #111;
+  background: #090909;
 }
 
 .crew-image__image {
-  width: 400px;
-  border-radius: 12px;
+  width: 480px;
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
   transition: transform 0.5s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
 }
 
 .crew-image__image:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-/* OUR DRIVE */
 .our-drive-container {
-  background: #0d0d0d;
+  background: #050505;
   text-align: center;
   flex-direction: column;
+  justify-content: center;
+}
+
+.our-drive__description {
+  margin: 0 auto;
+}
+
+/* FEATURED CONVOYS SECTION */
+.featured-events {
+  padding: 6rem 10%;
+  background: #080808;
+  border-top: 1px solid var(--card-border);
+  border-bottom: 1px solid var(--card-border);
+}
+
+.featured-events__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 3rem;
+}
+
+.events-home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.home-event-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.home-event-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--blue-border);
+}
+
+.home-event-card__img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.home-event-card__body {
+  padding: 1.5rem;
+}
+
+.home-event-card__badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 20px;
+  background: var(--blue-dim);
+  color: var(--blue);
+  border: 1px solid var(--blue-border);
+  margin-bottom: 0.75rem;
+}
+
+.home-event-card__title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.home-event-card__meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1rem;
 }
 
 /* CTA */
 .invitational-cta-container {
-  background: linear-gradient(135deg, #001f3f, #003366);
+  padding: 8rem 10%;
+  background: radial-gradient(circle at center, #001f3f 0%, #050505 85%);
   text-align: center;
+  display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .invitational-cta__title {
-  font-size: 2rem;
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.6rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   margin-bottom: 1rem;
 }
 
 .invitational-cta__description {
-  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  color: var(--off-white);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 2.5rem;
 }
 
-.cta-button {
-  padding: 0.8rem 2rem;
-  background: #00aaff;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 30px;
-  transition: 0.3s;
-}
-
-.cta-button:hover {
-  background: #0088cc;
-}
-
-/* PARALLAX ELEMENT (moving background layer) */
-.parallax-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 100%;
-  background: url("../Assets/luke-schobert-Q-x-GpmCx9E-unsplash.jpg") repeat-x;
-  opacity: 0.1;
-  z-index: -1;
+/* FOOTER */
+.site-footer {
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  border-top: 1px solid var(--card-border);
+  background: #040404;
 }
 
 /* SCROLL ANIMATION */
@@ -185,17 +349,22 @@ body {
 }
 
 /* RESPONSIVE */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .events-home-grid {
+    grid-template-columns: 1fr;
+  }
+
   .the-crew-container {
     flex-direction: column;
     text-align: center;
+    padding: 5rem 6%;
   }
 
-  .crew-image__image {
-    width: 100%;
+  .nav {
+    padding: 1.2rem 1.5rem;
   }
 
   .hero__title {
-    font-size: 2rem;
+    font-size: 2.4rem;
   }
 }
