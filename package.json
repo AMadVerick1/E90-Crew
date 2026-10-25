@@ -4,9 +4,9 @@
   "description": "Full-stack web application for E90 Social Club with admin CRUD and enquiry management",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "test": "node --test"
+    "start": "node --experimental-sqlite server.js",
+    "dev": "node --experimental-sqlite --watch server.js",
+    "test": "node --experimental-sqlite --test"
   },
   "repository": {
     "type": "git",

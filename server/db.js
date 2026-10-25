@@ -1,4 +1,18 @@
-const { DatabaseSync } = require('node:sqlite');
+let DatabaseSync;
+try {
+  DatabaseSync = require('node:sqlite').DatabaseSync;
+} catch (err) {
+  if (err && err.code === 'ERR_UNKNOWN_BUILTIN_MODULE') {
+    throw new Error(
+      '\n[DB ERROR] Node.js v22 requires the --experimental-sqlite flag.\n' +
+      'Please run the app using:\n' +
+      '  npm start\n' +
+      'or:\n' +
+      '  node --experimental-sqlite server.js\n'
+    );
+  }
+  throw err;
+}
 const fs = require('fs');
 const path = require('path');
 const crypto = require('node:crypto');

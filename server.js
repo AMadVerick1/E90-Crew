@@ -1,3 +1,18 @@
+// Auto-detect if node:sqlite requires --experimental-sqlite flag (e.g. Node 22.x)
+try {
+  require('node:sqlite');
+} catch (err) {
+  if (err && err.code === 'ERR_UNKNOWN_BUILTIN_MODULE' && !process.env._SQLITE_RESPAWNED) {
+    const { spawn } = require('node:child_process');
+    const child = spawn(process.execPath, ['--experimental-sqlite', ...process.argv.slice(1)], {
+      stdio: 'inherit',
+      env: { ...process.env, _SQLITE_RESPAWNED: '1' }
+    });
+    child.on('exit', (code) => process.exit(code || 0));
+    return;
+  }
+}
+
 const express = require('express');
 const path = require('path');
 const apiRoutes = require('./server/routes');
